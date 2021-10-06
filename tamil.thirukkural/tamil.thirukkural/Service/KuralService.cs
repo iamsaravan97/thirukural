@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,10 +11,13 @@ namespace Tamil.Thirukkural.Service
     public class KuralService : IKuralService
     {
         private ThirukkuralContext _kuralContext;
+        private IConfiguration _configration;
 
-        public KuralService()
+        public KuralService(IConfiguration configuration)
         {
-            _kuralContext = new ThirukkuralContext();
+            _configration = configuration;
+            _kuralContext = new ThirukkuralContext(_configration);
+          
         }
 
         public IList<CategoriesDto> GetAllChapters()

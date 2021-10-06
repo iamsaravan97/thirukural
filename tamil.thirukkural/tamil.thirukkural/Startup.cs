@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Tamil.Thirukkural.Models.DB;
 using Tamil.Thirukkural.Service;
 
 namespace tamil.thirukkural
@@ -30,6 +32,7 @@ namespace tamil.thirukkural
 
             services.AddControllers();
             services.AddScoped<IKuralService,KuralService>();
+            //services.AddDbContext<ThirukkuralContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));            //services.AddDbContext<ThirukkuralContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "tamil.thirukkural", Version = "v1" });

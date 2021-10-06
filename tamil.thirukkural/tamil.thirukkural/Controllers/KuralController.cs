@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,13 @@ namespace tamil.thirukkural.Controllers
 
         public  IKuralService _kuralService { get; }
 
-        public KuralController(ILogger<KuralController> logger,IKuralService kuralService)
+        private IConfiguration _configuration;
+
+        public KuralController(ILogger<KuralController> logger,IKuralService kuralService,IConfiguration configuration)
         {
             _logger = logger;
             _kuralService = kuralService;
+            _configuration = configuration;
         }
 
         [HttpGet]
