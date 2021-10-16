@@ -10,16 +10,17 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["tamil.thirukkural/tamil.thirukkural.csproj", "tamil.thirukkural/"]
-RUN dotnet restore "tamil.thirukkural/tamil.thirukkural.csproj"
+COPY ["Tamil.Thirukkural/Tamil.Thirukkural.csproj", "Tamil.Thirukkural/"]
+RUN dotnet restore "Tamil.Thirukkural/Tamil.Thirukkural.csproj"
 COPY . .
-WORKDIR "/src/tamil.thirukkural"
-RUN dotnet build "tamil.thirukkural.csproj" -c Release -o /app/build
+WORKDIR "/src/Tamil.Thirukkural"
+RUN dotnet build "Tamil.Thirukkural.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "tamil.thirukkural.csproj" -c Release -o /app/publish
+RUN dotnet publish "Tamil.Thirukkural.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "tamil.thirukkural.dll"]
+ENTRYPOINT ["dotnet", "Tamil.Thirukkural.dll"]
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet Tamil.Thirukkural.dll

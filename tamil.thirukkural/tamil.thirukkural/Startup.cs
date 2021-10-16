@@ -35,7 +35,7 @@ namespace tamil.thirukkural
             //services.AddDbContext<ThirukkuralContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));            //services.AddDbContext<ThirukkuralContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "tamil.thirukkural", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Tamil.Thirukkural", Version = "v1" });
             });
         }
 
@@ -46,7 +46,7 @@ namespace tamil.thirukkural
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "tamil.thirukkural v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Tamil.Thirukkural v1"));
             }
 
             app.UseHttpsRedirection();
