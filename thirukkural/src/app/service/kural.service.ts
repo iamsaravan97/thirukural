@@ -9,7 +9,7 @@ import { Categories } from '../model/categories';
   providedIn: 'root'
 })
 export class KuralService {
-  private endpointURL : string = "https://localhost:44339/kural/";
+  private endpointURL : string = "http://thirukkuralapi.somee.com/kural/";
 
   constructor(private httpClient : HttpClient) { }
 
