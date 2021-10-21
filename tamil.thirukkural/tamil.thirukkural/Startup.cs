@@ -32,6 +32,7 @@ namespace tamil.thirukkural
 
             services.AddControllers();
             services.AddScoped<IKuralService,KuralService>();
+            services.AddCors();
             //services.AddDbContext<ThirukkuralContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));            //services.AddDbContext<ThirukkuralContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));
             services.AddSwaggerGen(c =>
             {
@@ -45,6 +46,12 @@ namespace tamil.thirukkural
             if (env.IsDevelopment() || env.IsProduction())
             {
                 app.UseDeveloperExceptionPage();
+
+                app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Tamil.Thirukkural v1"));
             }
