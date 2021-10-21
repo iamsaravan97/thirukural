@@ -3,15 +3,13 @@
 }
 
 
-.container {
-    margin: 10px;
-  }
+
   
   /* Add application styles & imports to this file! */
 
-.bounds {
-    background-color:#ddd;
-    height :800px;
+.main {
+    height : 100vh;
+    margin: 10px;
   }
   
   .sec1 {
