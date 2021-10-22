@@ -1,5 +1,5 @@
 export class Categories {
-    Id: number;
-    Name: string;
-    Count: number;
+    id: number;
+    name: string;
+    count: number;
 }

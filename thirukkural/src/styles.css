@@ -2,7 +2,7 @@
 @import '@angular/material/prebuilt-themes/indigo-pink';
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow-y: hidden; }
 
 
 .t_height_100{
@@ -11,4 +11,12 @@ height : 100%;
 
 .t_z_index{
 z-index: 999;
+}
+
+.t_overflow-y_auto{
+    overflow-y : auto;
+}
+
+.layout-height{
+    height : calc(100vh - 180px);
 }

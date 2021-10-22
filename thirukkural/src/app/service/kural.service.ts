@@ -9,7 +9,9 @@ import { Categories } from '../model/categories';
   providedIn: 'root'
 })
 export class KuralService {
-  private endpointURL : string = "http://thirukkuralapi.somee.com/kural/";
+ 
+  // private endpointURL : string = "http://thirukkuralapi.somee.com/kural/";
+  private endpointURL : string = " https://localhost:44339/kural/";
 
   constructor(private httpClient : HttpClient) { }
 
@@ -37,14 +39,14 @@ export class KuralService {
 
   
   public getAllSections():Observable<Array<Categories>>{
-    return this.httpClient.get<Array<Categories>>(this.endpointURL+"GetAllSections").pipe(
+    return this.httpClient.get<Array<Categories>>(this.endpointURL+"GetSections").pipe(
       retry(1),
       catchError(this.httpError)
     )
   }
 
   public getAllSubSections():Observable<Array<Categories>>{
-    return this.httpClient.get<Array<Categories>>(this.endpointURL+"GetAllSubSections").pipe(
+    return this.httpClient.get<Array<Categories>>(this.endpointURL+"GetSubSections").pipe(
       retry(1),
       catchError(this.httpError)
     )
