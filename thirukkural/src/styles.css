@@ -5,8 +5,24 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow-y: hidden; }
 
 
+.t_width_100{
+    width:  100%;
+}
+
 .t_height_100{
 height : 100%;
+}
+
+.t_height_90{
+    height : 90%;
+}
+
+.t_height_50{
+    height : 50%;
+}
+
+.t_height_30{
+    height : 30%;
 }
 
 .t_z_index{

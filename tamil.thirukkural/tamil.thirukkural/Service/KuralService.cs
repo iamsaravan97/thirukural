@@ -95,5 +95,58 @@ namespace Tamil.Thirukkural.Service
             if (result == null) throw new Exception("Error in retrieve kurals. Please contact developers");
             return result;
         }
+
+        public IList<Kural> GetKuralByList(FilterListDto filterListDto)
+        {
+            var KuralsList = new List<Kural>();
+
+            if(filterListDto == null)
+            {
+                throw new Exception("Parameter is empty");
+            }
+
+            //
+            if(filterListDto.ChapterIds.Count == 0 && filterListDto.SectionIds.Count == 0 &&
+                filterListDto.SubSectionIds.Count == 0)
+            {
+                var result = GetAllKural();
+                KuralsList.AddRange(result);
+            }
+            //by categories
+            if (filterListDto.ChapterIds.Count != 0)
+            {
+                filterListDto.ChapterIds.ForEach(categoryId =>
+                {
+                    var result = _kuralContext.Kurals.Where(x => x.ChapterId == categoryId).ToList();
+                    if (result == null) throw new Exception("Error in retrieve kurals. Please contact admin");
+                    KuralsList.AddRange(result);
+                });
+            }
+
+            //by subsection
+            if (filterListDto.SubSectionIds.Count != 0)
+            {
+                filterListDto.SubSectionIds.ForEach(subsectionId =>
+                {
+                    var result = _kuralContext.Kurals.Where(x => x.CgId == subsectionId).ToList();
+                    if (result == null) throw new Exception("Error in retrieve kurals. Please contact admin");
+                    KuralsList.AddRange(result);
+                });
+            }
+
+            //by section
+            if (filterListDto.SectionIds.Count != 0)
+            {
+                filterListDto.SectionIds.ForEach(sectionId =>
+                {
+                    var result = _kuralContext.Kurals.Where(x => x.SectionId == sectionId).ToList();
+                    if (result == null) throw new Exception("Error in retrieve kurals. Please contact admin");
+                    KuralsList.AddRange(result);
+                });
+            }
+
+            return KuralsList.Distinct().OrderBy(x=>x.KuralId).ToList();
+
+        }
     }
 }

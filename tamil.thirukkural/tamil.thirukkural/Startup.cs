@@ -29,8 +29,9 @@ namespace tamil.thirukkural
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllers();
+         
+            services.AddControllers()
+                .AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null);
             services.AddScoped<IKuralService,KuralService>();
             services.AddCors();
             //services.AddDbContext<ThirukkuralContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));            //services.AddDbContext<ThirukkuralContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));

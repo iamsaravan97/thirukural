@@ -4,6 +4,8 @@ import { Observable, throwError } from 'rxjs';
 import { Kural } from '../model/kural';
 import { retry, catchError } from 'rxjs/operators';
 import { Categories } from '../model/categories';
+import { environment } from 'src/environments/environment';
+import { FilterListDto } from '../model/filterlis';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ import { Categories } from '../model/categories';
 export class KuralService {
  
   // private endpointURL : string = "http://thirukkuralapi.somee.com/kural/";
-  private endpointURL : string = " https://localhost:44339/kural/";
+  private endpointURL : string =  environment.url
 
   constructor(private httpClient : HttpClient) { }
 
@@ -76,6 +78,13 @@ export class KuralService {
 
   public getKuralsBySubSectionId(sectionId:any):Observable<Array<Kural>>{
     return this.httpClient.get<Array<Kural>>(this.endpointURL+"GetKuralsBySubSectionId?subSectionId="+sectionId).pipe(
+      retry(1),
+      catchError(this.httpError)
+    )
+  }
+
+  public getKuralsByList(filterlist:FilterListDto):Observable<Array<Kural>>{
+    return this.httpClient.post<Array<Kural>>(this.endpointURL+"KuralsByList",filterlist).pipe(
       retry(1),
       catchError(this.httpError)
     )

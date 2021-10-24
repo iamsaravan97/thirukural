@@ -9,14 +9,23 @@
     margin: 10px;
   }
 
-.category_layout::-webkit-scrollbar {
+.scrollstyle::-webkit-scrollbar {
   width: 8px;
   height: 8px;
   border-radius: 30px;
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.category_layout::-webkit-scrollbar-thumb {
+.scrollstyle::-webkit-scrollbar-thumb {
   border-radius: 30px;
-  background-color: #3f51b5 
+  background-color: #babdb7 
+}
+
+.mat-column-Id{
+  width: 20%;
+  text-align: center;
+}
+
+.mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate, .mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate{
+  background-color:  #3f51b5;
 }

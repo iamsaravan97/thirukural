@@ -18,6 +18,8 @@ namespace Tamil.Thirukkural.Service
         public IList<CategoriesDto> GetAllSections();
         public IList<CategoriesDto> GetAllSubSections();
 
+        public IList<Kural> GetKuralByList(FilterListDto filterListDto);
+
 
 
 

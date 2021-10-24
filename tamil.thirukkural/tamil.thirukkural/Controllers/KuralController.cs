@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Tamil.Thirukkural.Models.DB;
+using Tamil.Thirukkural.Models.DTO;
 using Tamil.Thirukkural.Service;
 
 namespace tamil.thirukkural.Controllers
@@ -131,6 +132,20 @@ namespace tamil.thirukkural.Controllers
                 return Ok(result);
             }
             catch (Exception ex) { return Ok(ex); };
+        }
+
+        [HttpPost]
+        [Route("KuralsByList")]
+        public IActionResult PostKuralsByList([FromBody] FilterListDto filterListDto)
+        {
+            try
+            {
+                if (filterListDto == null) throw new Exception("Parameter is null");
+                var result = _kuralService.GetKuralByList(filterListDto);
+                return Ok(result);
+            }
+            catch (Exception ex) { return Ok(ex); };
+
         }
 
 
