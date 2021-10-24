@@ -4,7 +4,7 @@
 		
 		<div class="layout-height" fxFlex="20" fxFlex.xs="55">
 			<mat-card class="t_height_100">
-				<div mat-subheader>{{trans_categories}} ({{categories.length}}) {{selectcategories?.selectedOptions.selected.length}} </div>
+				<div mat-subheader>{{trans_categories}} ({{categories.length}}) </div>
 				<div class="t_height_90 scrollstyle t_overflow-y_auto">
 					<mat-selection-list #selectcategories >
 						<mat-list-option (click)="filterbyChapterId($event, selectcategories?.selectedOptions.selected)" [value]="category" *ngFor="let category of categories" >
@@ -46,7 +46,7 @@
 				  </table>
 				</div>
 			
-				  <mat-paginator  class="t_height_10  mat-paginator-sticky" [length]="5" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+				  <mat-paginator  class="t_height_10  mat-paginator-sticky"  [pageSize]="pagesize" [pageSizeOptions]="pagesizeoptions"
 				  showFirstLastButtons 
 				  aria-label="Select page of kural">
 			  </mat-paginator>

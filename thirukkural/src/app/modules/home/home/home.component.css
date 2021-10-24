@@ -27,5 +27,5 @@
 }
 
 .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate, .mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate{
-  background-color:  #3f51b5;
+  background-color:  #3f51b5 !important;
 }

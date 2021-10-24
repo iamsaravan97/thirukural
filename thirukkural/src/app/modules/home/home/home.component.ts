@@ -39,10 +39,10 @@ export class HomeComponent implements OnInit,AfterViewInit {
   //#region grid setup
   displayedColumns : string[] = ['Id','Kural']
 
-  dataSource : MatTableDataSource<Kural>
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  
+  dataSource : MatTableDataSource<Kural>;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  pagesize : number = 10;
+  pagesizeoptions : Array<number> = [5, 10, 20];
 
   ngAfterViewInit() {
    // this.dataSource.paginator = this.paginator;
@@ -136,11 +136,17 @@ export class HomeComponent implements OnInit,AfterViewInit {
   }
 
   loadKurals(filterList:FilterListDto){
+    this.pagesizeoptions = [];
+ 
     let subscription = this._kuralservice.getKuralsByList(filterList).subscribe({
       next : (res : Array<Kural>)=>{
         if(res != null)
         this.kuralgrid = [...res];
         this.dataSource = new MatTableDataSource<Kural>(this.kuralgrid);
+        this.dataSource.paginator = this.paginator;
+        this.pagesizeoptions =[5,10];
+        if(res.length > 10)
+        this.pagesizeoptions.push(res.length)
       }
     })
     this.subscriptions.push(subscription);
@@ -155,10 +161,6 @@ export class HomeComponent implements OnInit,AfterViewInit {
     }
   }
 
-
-  save(){
-    alert("hi");
-  }
 
   filterbyChapterId(e,selectedcategories:Array<any>){
     this.filterList.ChapterIds = [];
