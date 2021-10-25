@@ -46,10 +46,15 @@
 				  </table>
 				</div>
 			
-				  <mat-paginator  class="t_height_10  mat-paginator-sticky"  [pageSize]="pagesize" [pageSizeOptions]="pagesizeoptions"
+				  <mat-paginator class="t_height_10  mat-paginator-sticky" 
+				  [length]="totalRows"
+				   [pageSize]="pagesize" [pageSizeOptions]="pagesizeoptions"
 				  showFirstLastButtons 
+				  (page)="pageChanged($event)"
 				  aria-label="Select page of kural">
 			  </mat-paginator>
+
+
 			
 			</mat-card>
 		

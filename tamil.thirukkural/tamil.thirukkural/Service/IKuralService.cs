@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Tamil.Thirukkural.Models.Common;
 using Tamil.Thirukkural.Models.DB;
 using Tamil.Thirukkural.Models.DTO;
 
@@ -19,6 +20,8 @@ namespace Tamil.Thirukkural.Service
         public IList<CategoriesDto> GetAllSubSections();
 
         public IList<Kural> GetKuralByList(FilterListDto filterListDto);
+
+        public PagedList<Kural> GetKuralPagedResults(FilterListDto filterListDto);
 
 
 

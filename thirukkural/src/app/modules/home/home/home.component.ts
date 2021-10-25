@@ -6,6 +6,8 @@ import { Subscription } from 'rxjs';
 import { Categories } from 'src/app/model/categories';
 import { FilterListDto } from 'src/app/model/filterlis';
 import { Kural } from 'src/app/model/kural';
+import { PagedList } from 'src/app/model/pagedresults';
+import { PaginationMode } from 'src/app/model/type/type';
 import { KuralService } from 'src/app/service/kural.service';
 
 @Component({
@@ -13,7 +15,7 @@ import { KuralService } from 'src/app/service/kural.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit,AfterViewInit {
+export class HomeComponent implements OnInit {
 
   //#region  subscription
   subscriptions : Subscription[] =[];
@@ -43,11 +45,9 @@ export class HomeComponent implements OnInit,AfterViewInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   pagesize : number = 10;
   pagesizeoptions : Array<number> = [5, 10, 20];
+  paginationMode : PaginationMode = "Client"; //Server
 
-  ngAfterViewInit() {
-   // this.dataSource.paginator = this.paginator;
-    console.log( this.paginator.page);
-  }
+
 
   //#endregion
 
@@ -56,8 +56,11 @@ export class HomeComponent implements OnInit,AfterViewInit {
     Id : 0,
     ChapterIds : [],
     SectionIds :[],
-    SubSectionIds :[]
+    SubSectionIds :[],
+    PageNumber : 0,
+    PageSize : 0
   }
+  totalRows: number;
 
   //#endregion
 
@@ -67,7 +70,9 @@ export class HomeComponent implements OnInit,AfterViewInit {
       Id : 0,
       ChapterIds : [],
       SectionIds :[],
-      SubSectionIds :[]
+      SubSectionIds :[],
+      PageNumber : 1,
+      PageSize : this.pagesize
     }
     this.loadKurals(filterList);
     this.loadAllChapters();
@@ -137,7 +142,7 @@ export class HomeComponent implements OnInit,AfterViewInit {
 
   loadKurals(filterList:FilterListDto){
     this.pagesizeoptions = [];
- 
+    if(this.paginationMode == "Client"){
     let subscription = this._kuralservice.getKuralsByList(filterList).subscribe({
       next : (res : Array<Kural>)=>{
         if(res != null)
@@ -145,11 +150,27 @@ export class HomeComponent implements OnInit,AfterViewInit {
         this.dataSource = new MatTableDataSource<Kural>(this.kuralgrid);
         this.dataSource.paginator = this.paginator;
         this.pagesizeoptions =[5,10];
+        this.totalRows = res.length
         if(res.length > 10)
         this.pagesizeoptions.push(res.length)
       }
     })
     this.subscriptions.push(subscription);
+  }else{
+    let subscription = this._kuralservice.getKuralsPagedResultsByList(filterList).subscribe({
+      next : (res : PagedList<Kural>)=>{
+        if(res != null)
+        this.kuralgrid = [...res.Items];
+        this.dataSource = new MatTableDataSource<Kural>(this.kuralgrid);
+        this.dataSource.paginator = this.paginator;
+        this.pagesizeoptions =[5,10];
+        this.totalRows = res.TotalCount
+        if(res.Items.length > 10)
+        this.pagesizeoptions.push(res.TotalPages)
+      }
+    })
+    this.subscriptions.push(subscription);
+  }
   }
 
   resetfilter(){
@@ -157,13 +178,24 @@ export class HomeComponent implements OnInit,AfterViewInit {
       Id : 0,
       ChapterIds : [],
       SectionIds :[],
-      SubSectionIds :[]
+      SubSectionIds :[],
+      PageSize : this.pagesize,
+      PageNumber : 1
     }
   }
 
+  pageChanged(e:any){
+    if(this.paginationMode!='Client'){
+    var filter = this.filterList;
+    filter.PageNumber = e.pageIndex+1;
+    filter.PageSize = e.pageSize;
+    this.loadKurals(filter);
+    }
+  }
 
   filterbyChapterId(e,selectedcategories:Array<any>){
     this.filterList.ChapterIds = [];
+    //this.resetfilter();
     if(selectedcategories.length != 0 ){
       selectedcategories.forEach(ele=>{
         this.filterList.ChapterIds.push(ele.value.Id);
@@ -175,6 +207,7 @@ export class HomeComponent implements OnInit,AfterViewInit {
 
   filterbySectionId(e,selectedsection:Array<any>){
     this.filterList.SectionIds = [];
+  //  this.resetfilter();
     if(selectedsection.length != 0 ){
       selectedsection.forEach(ele=>{
         this.filterList.SectionIds.push(ele.value.Id);
@@ -185,6 +218,7 @@ export class HomeComponent implements OnInit,AfterViewInit {
 
   filterbySubsectionId(e,selectedsubsection:Array<any>){
     this.filterList.SubSectionIds = [];
+    //this.resetfilter();
     if(selectedsubsection.length != 0 ){
       selectedsubsection.forEach(ele=>{
         this.filterList.SubSectionIds.push(ele.value.Id);

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -142,6 +143,30 @@ namespace tamil.thirukkural.Controllers
             {
                 if (filterListDto == null) throw new Exception("Parameter is null");
                 var result = _kuralService.GetKuralByList(filterListDto);
+                return Ok(result);
+            }
+            catch (Exception ex) { return Ok(ex); };
+
+        }
+
+        [HttpPost]
+        [Route("KuralsPageResultsByList")]
+        public IActionResult PostKuralsPageResults([FromBody] FilterListDto filterListDto)
+        {
+            try
+            {
+                if (filterListDto == null) throw new Exception("Parameter is null");
+                var result = _kuralService.GetKuralPagedResults(filterListDto);
+                var metadata = new
+                {
+                    result.TotalCount,
+                    result.PageSize,
+                    result.CurrentPage,
+                    result.TotalPages,
+                    result.HasNext,
+                    result.HasPrevious
+                };
+                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
                 return Ok(result);
             }
             catch (Exception ex) { return Ok(ex); };

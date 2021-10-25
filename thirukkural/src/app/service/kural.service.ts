@@ -6,6 +6,7 @@ import { retry, catchError } from 'rxjs/operators';
 import { Categories } from '../model/categories';
 import { environment } from 'src/environments/environment';
 import { FilterListDto } from '../model/filterlis';
+import { PagedList } from '../model/pagedresults';
 
 @Injectable({
   providedIn: 'root'
@@ -85,6 +86,14 @@ export class KuralService {
 
   public getKuralsByList(filterlist:FilterListDto):Observable<Array<Kural>>{
     return this.httpClient.post<Array<Kural>>(this.endpointURL+"KuralsByList",filterlist).pipe(
+      retry(1),
+      catchError(this.httpError)
+    )
+  }
+
+  
+  public getKuralsPagedResultsByList(filterlist:FilterListDto):Observable<PagedList<Kural>>{
+    return this.httpClient.post<PagedList<Kural>>(this.endpointURL+"KuralsPageResultsByList",filterlist).pipe(
       retry(1),
       catchError(this.httpError)
     )
