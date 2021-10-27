@@ -8,7 +8,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import {MatPaginatorModule} from '@angular/material/paginator';
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -21,7 +21,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatCardModule,
     MatListModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatProgressBarModule
+    
   ],
   exports :[
     MatToolbarModule,
@@ -30,7 +32,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatCardModule,
     MatListModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatProgressBarModule
     
   ]
 })

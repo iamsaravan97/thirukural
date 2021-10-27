@@ -4,6 +4,9 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow-y: hidden; }
 
+.t_order_2{
+    order : 2
+}
 
 .t_width_100{
     width:  100%;
