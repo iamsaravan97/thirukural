@@ -1,12 +1,12 @@
 .content{
-    margin-top: 10%;
     min-width: 300px;
+    margin-top: 5%;
 }
   /* Add application styles & imports to this file! */
 
 .main {
     height : 100vh;
-    margin-top:11%;
+
   }
 
 .scrollstyle::-webkit-scrollbar {

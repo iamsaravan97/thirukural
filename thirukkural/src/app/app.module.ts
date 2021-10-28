@@ -8,8 +8,10 @@ import { HomeModule } from './modules/home/home.module';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { SharedModule } from './modules/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { LoadingserviceService } from './modules/shared/core/loading/loadingservice.service';
+import { LoadingInterceptor } from './modules/shared/core/interceptors/loading_interceptor';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BrowserAnimationsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [LoadingserviceService,{
+    provide: HTTP_INTERCEPTORS,
+    useClass: LoadingInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

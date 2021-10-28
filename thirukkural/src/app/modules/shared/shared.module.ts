@@ -6,13 +6,15 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { ContentComponent } from './content/content.component';
 import { RouterModule } from '@angular/router';
 import { AngularMaterialModule } from 'src/app/angular-material/angular-material.module';
+import { LoadingComponent } from './core/loading/loading.component';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    ContentComponent
+    ContentComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { AngularMaterialModule } from 'src/app/angular-material/angular-material
   exports:[
     HeaderComponent,
     FooterComponent,
-    ContentComponent
+    ContentComponent,
+    LoadingComponent
   ]
 })
 export class SharedModule { }
