@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   pagesize : number = 10;
   pagesizeoptions : Array<number> = [5, 10, 20];
-  paginationMode : PaginationMode = "Server"; //Server
+  paginationMode : PaginationMode = "Client"; //Server
 
   currentPage : number = 0;
 
@@ -164,7 +164,7 @@ export class HomeComponent implements OnInit {
         if(res != null)
         this.kuralgrid = [...res.Items];
         this.dataSource = new MatTableDataSource<Kural>(this.kuralgrid);
-        this.dataSource._updateChangeSubscription();
+       // this.dataSource._updateChangeSubscription();
         this.dataSource.paginator = this.paginator;
         setTimeout(() => {
           this.dataSource.paginator.pageIndex = this.currentPage;

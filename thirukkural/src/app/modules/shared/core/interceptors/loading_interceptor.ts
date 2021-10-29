@@ -10,7 +10,7 @@ import {
   HttpErrorResponse
 } from "@angular/common/http";
 import { Observable, ReplaySubject } from "rxjs";
-import { LoadingserviceService } from "../loading/loadingservice.service";
+import { LoadingserviceService } from "../services/loadingservice.service";
 
 
 @Injectable()
@@ -18,15 +18,7 @@ export class LoadingInterceptor implements HttpInterceptor {
 
   constructor(private loadingService : LoadingserviceService) { }
 
-  private load : string = "show";
-
-  dataStream: ReplaySubject<any> = new ReplaySubject();
-
-  dataStream$(): Observable<any> {
-      return this.dataStream.asObservable();
-  }
-
-  
+  private load : string = "hide";
 
 
   //function which will be called for all http calls
@@ -37,9 +29,11 @@ export class LoadingInterceptor implements HttpInterceptor {
 
 
      // this.loadingService.show();
-      this.loadingService.callComponentMethod();
+     if(this.load != "show"){
+      this.loadingService.show();
+    
 
-      this.dataStream.next(true);
+  }
     //how to update the request Parameters
     const updatedRequest = request.clone({
       headers: request.headers.set("Authorization", "Some-dummyCode")
@@ -55,6 +49,7 @@ export class LoadingInterceptor implements HttpInterceptor {
           //logging the http response to browser's console in case of a success
           if (event instanceof HttpResponse) {
             console.log("api call success :", event);
+      
           }
         },
         error => {
@@ -65,11 +60,11 @@ export class LoadingInterceptor implements HttpInterceptor {
         },
       ),
       finalize(()=>{
-        setTimeout(() => {
-          this.load = "hide"
+          this.load = "hide";
           this.loadingService.hide();
-      }, 4000);
-      })
+
+      }) 
+    
     
     )
   }

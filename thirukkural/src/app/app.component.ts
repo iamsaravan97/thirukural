@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoadingserviceService } from './modules/shared/core/services/loadingservice.service';
 
 
 @Component({
@@ -12,6 +13,10 @@ export class AppComponent {
   /**
    *
    */
-  constructor() {
+  constructor(private loadingservice : LoadingserviceService) {
+    this.loadingservice.componentMethodCalled$.subscribe(x=>{
+      console.log(x);
+    })
   }
+
 }

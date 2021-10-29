@@ -6,7 +6,8 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { ContentComponent } from './content/content.component';
 import { RouterModule } from '@angular/router';
 import { AngularMaterialModule } from 'src/app/angular-material/angular-material.module';
-import { LoadingComponent } from './core/loading/loading.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -14,7 +15,7 @@ import { LoadingComponent } from './core/loading/loading.component';
     HeaderComponent,
     FooterComponent,
     ContentComponent,
-    LoadingComponent
+  
   ],
   imports: [
     CommonModule,
@@ -25,7 +26,7 @@ import { LoadingComponent } from './core/loading/loading.component';
     HeaderComponent,
     FooterComponent,
     ContentComponent,
-    LoadingComponent
-  ]
+  ],
+
 })
 export class SharedModule { }

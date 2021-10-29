@@ -10,8 +10,9 @@ import { SharedModule } from './modules/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { LoadingserviceService } from './modules/shared/core/loading/loadingservice.service';
+
 import { LoadingInterceptor } from './modules/shared/core/interceptors/loading_interceptor';
+import { LoadingserviceService } from './modules/shared/core/services/loadingservice.service';
 
 @NgModule({
   declarations: [
