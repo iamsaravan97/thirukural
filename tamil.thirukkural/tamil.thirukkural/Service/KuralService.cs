@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AutoMapper;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +13,14 @@ namespace Tamil.Thirukkural.Service
     public class KuralService : IKuralService
     {
         private ThirukkuralContext _kuralContext;
+        private readonly IMapper _mapper;
         private IConfiguration _configration;
 
-        public KuralService(IConfiguration configuration)
+        public KuralService(IConfiguration configuration,IMapper mapper)
         {
             _configration = configuration;
             _kuralContext = new ThirukkuralContext(_configration);
+            _mapper = mapper;
           
         }
 
@@ -62,51 +65,85 @@ namespace Tamil.Thirukkural.Service
             return result;
         }
 
-        public IList<Kural> GetAllKural()
+        public IList<KuralDto> GetAllKural()
         {
-            var result = _kuralContext.Kurals.OrderBy(x=>x.KuralId).ToList();
+            var retrieveddata = _kuralContext.Kurals.OrderBy(x=>x.KuralId).ToList();
+            if (retrieveddata == null) throw new Exception("Error in retrieve kurals. Please contact developers");
+            var result = _mapper.Map<List<KuralDto>>(retrieveddata);
+            if (result == null) throw new Exception("Error in retrieve kurals. Please contact developers");
             result.ForEach(ele =>
             {
                 var splitengexp = ele.Transliteration.Split(' ');
                 ele.TransFirstLine = string.Join(" ", splitengexp.Take(4).ToList());
                 ele.TransSecondLine = string.Join(" ", splitengexp.TakeLast(3).ToList());
             });
-
-            if (result == null) throw new Exception("Error in retrieve kurals. Please contact developers");
             return result;
         }
 
-        public IList<Kural> GetKuralsByChapterId(int chapterId)
+        public IList<KuralDto> GetKuralsByChapterId(int chapterId)
         {
-            var result = _kuralContext.Kurals.Where(x=>x.ChapterId == chapterId).ToList();
+            var retrieveddata = _kuralContext.Kurals.Where(x=>x.ChapterId == chapterId).ToList();
+            if (retrieveddata == null) throw new Exception("Error in retrieve kurals. Please contact developers");
+            var result = _mapper.Map<List<KuralDto>>(retrieveddata);
             if (result == null) throw new Exception("Error in retrieve kurals. Please contact developers");
+            result.ForEach(ele =>
+            {
+                var splitengexp = ele.Transliteration.Split(' ');
+                ele.TransFirstLine = string.Join(" ", splitengexp.Take(4).ToList());
+                ele.TransSecondLine = string.Join(" ", splitengexp.TakeLast(3).ToList());
+            });
             return result;
         }
 
-        public IList<Kural> GetKuralsByKuralId(int kuralId)
+        public IList<KuralDto> GetKuralsByKuralId(int kuralId)
         {
-            var result = _kuralContext.Kurals.Where(x => x.KuralId == kuralId).ToList();
+            var retrieveddata = _kuralContext.Kurals.Where(x => x.KuralId == kuralId).ToList();
+            if (retrieveddata == null) throw new Exception("Error in retrieve kurals. Please contact developers");
+            var result = _mapper.Map<List<KuralDto>>(retrieveddata);
             if (result == null) throw new Exception("Error in retrieve kurals. Please contact developers");
+            result.ForEach(ele =>
+            {
+                var splitengexp = ele.Transliteration.Split(' ');
+                ele.TransFirstLine = string.Join(" ", splitengexp.Take(4).ToList());
+                ele.TransSecondLine = string.Join(" ", splitengexp.TakeLast(3).ToList());
+            });
             return result;
         }
 
-        public IList<Kural> GetKuralsBySectionId(int sectionId)
+        public IList<KuralDto> GetKuralsBySectionId(int sectionId)
         {
-            var result = _kuralContext.Kurals.Where(x => x.SectionId == sectionId).ToList();
+            var retrieveddata = _kuralContext.Kurals.Where(x => x.SectionId == sectionId).ToList();
+            if (retrieveddata == null) throw new Exception("Error in retrieve kurals. Please contact developers");
+            var result = _mapper.Map<List<KuralDto>>(retrieveddata);
             if (result == null) throw new Exception("Error in retrieve kurals. Please contact developers");
+            result.ForEach(ele =>
+            {
+                var splitengexp = ele.Transliteration.Split(' ');
+                ele.TransFirstLine = string.Join(" ", splitengexp.Take(4).ToList());
+                ele.TransSecondLine = string.Join(" ", splitengexp.TakeLast(3).ToList());
+            });
             return result;
         }
 
-        public IList<Kural> GetKuralsBySubSectionId(int subSectionId)
+        public IList<KuralDto> GetKuralsBySubSectionId(int subSectionId)
         {
-            var result = _kuralContext.Kurals.Where(x => x.CgId == subSectionId).ToList();
+
+            var retrieveddata = _kuralContext.Kurals.Where(x => x.CgId == subSectionId).ToList();
+            if (retrieveddata == null) throw new Exception("Error in retrieve kurals. Please contact developers");
+            var result = _mapper.Map<List<KuralDto>>(retrieveddata);
             if (result == null) throw new Exception("Error in retrieve kurals. Please contact developers");
+            result.ForEach(ele =>
+            {
+                var splitengexp = ele.Transliteration.Split(' ');
+                ele.TransFirstLine = string.Join(" ", splitengexp.Take(4).ToList());
+                ele.TransSecondLine = string.Join(" ", splitengexp.TakeLast(3).ToList());
+            });
             return result;
         }
 
-        public IList<Kural> GetKuralByList(FilterListDto filterListDto)
+        public IList<KuralDto> GetKuralByList(FilterListDto filterListDto)
         {
-            var KuralsList = new List<Kural>();
+            var KuralsList = new List<KuralDto>();
 
             if(filterListDto == null)
             {
@@ -125,8 +162,16 @@ namespace Tamil.Thirukkural.Service
             {
                 filterListDto.ChapterIds.ForEach(categoryId =>
                 {
-                    var result = _kuralContext.Kurals.Where(x => x.ChapterId == categoryId).ToList();
+                    var retrieveddata = _kuralContext.Kurals.Where(x => x.ChapterId == categoryId).ToList();
+                    if (retrieveddata == null) throw new Exception("Error in retrieve kurals. Please contact developers");
+                    var result = _mapper.Map<List<KuralDto>>(retrieveddata);
                     if (result == null) throw new Exception("Error in retrieve kurals. Please contact admin");
+                    result.ForEach(ele =>
+                    {
+                        var splitengexp = ele.Transliteration.Split(' ');
+                        ele.TransFirstLine = string.Join(" ", splitengexp.Take(4).ToList());
+                        ele.TransSecondLine = string.Join(" ", splitengexp.TakeLast(3).ToList());
+                    });
                     KuralsList.AddRange(result);
                 });
             }
@@ -136,8 +181,16 @@ namespace Tamil.Thirukkural.Service
             {
                 filterListDto.SubSectionIds.ForEach(subsectionId =>
                 {
-                    var result = _kuralContext.Kurals.Where(x => x.CgId == subsectionId).ToList();
+                    var retrieveddata = _kuralContext.Kurals.Where(x => x.CgId == subsectionId).ToList();
+                    if (retrieveddata == null) throw new Exception("Error in retrieve kurals. Please contact developers");
+                    var result = _mapper.Map<List<KuralDto>>(retrieveddata);
                     if (result == null) throw new Exception("Error in retrieve kurals. Please contact admin");
+                    result.ForEach(ele =>
+                    {
+                        var splitengexp = ele.Transliteration.Split(' ');
+                        ele.TransFirstLine = string.Join(" ", splitengexp.Take(4).ToList());
+                        ele.TransSecondLine = string.Join(" ", splitengexp.TakeLast(3).ToList());
+                    });
                     KuralsList.AddRange(result);
                 });
             }
@@ -147,8 +200,16 @@ namespace Tamil.Thirukkural.Service
             {
                 filterListDto.SectionIds.ForEach(sectionId =>
                 {
-                    var result = _kuralContext.Kurals.Where(x => x.SectionId == sectionId).ToList();
+                    var retrieveddata = _kuralContext.Kurals.Where(x => x.SectionId == sectionId).ToList();
+                    if (retrieveddata == null) throw new Exception("Error in retrieve kurals. Please contact developers");
+                    var result = _mapper.Map<List<KuralDto>>(retrieveddata);
                     if (result == null) throw new Exception("Error in retrieve kurals. Please contact admin");
+                    result.ForEach(ele =>
+                    {
+                        var splitengexp = ele.Transliteration.Split(' ');
+                        ele.TransFirstLine = string.Join(" ", splitengexp.Take(4).ToList());
+                        ele.TransSecondLine = string.Join(" ", splitengexp.TakeLast(3).ToList());
+                    });
                     KuralsList.AddRange(result);
                 });
             }
@@ -157,9 +218,9 @@ namespace Tamil.Thirukkural.Service
 
         }
 
-        public PagedList<Kural> GetKuralPagedResults(FilterListDto filterListDto)
+        public PagedList<KuralDto> GetKuralPagedResults(FilterListDto filterListDto)
         {
-            var KuralsList = new List<Kural>();
+            var KuralsList = new List<KuralDto>();
 
             if (filterListDto == null)
             {
@@ -178,8 +239,15 @@ namespace Tamil.Thirukkural.Service
             {
                 filterListDto.ChapterIds.ForEach(categoryId =>
                 {
-                    var result = _kuralContext.Kurals.Where(x => x.ChapterId == categoryId).ToList();
-                    if (result == null) throw new Exception("Error in retrieve kurals. Please contact admin");
+                    var retrieveddata = _kuralContext.Kurals.Where(x => x.ChapterId == categoryId).ToList();
+                    if (retrieveddata == null) throw new Exception("Error in retrieve kurals. Please contact admin");
+                    var result = _mapper.Map<List<KuralDto>>(retrieveddata);
+                    result.ForEach(ele =>
+                    {
+                        var splitengexp = ele.Transliteration.Split(' ');
+                        ele.TransFirstLine = string.Join(" ", splitengexp.Take(4).ToList());
+                        ele.TransSecondLine = string.Join(" ", splitengexp.TakeLast(3).ToList());
+                    });
                     KuralsList.AddRange(result);
                 });
             }
@@ -189,8 +257,15 @@ namespace Tamil.Thirukkural.Service
             {
                 filterListDto.SubSectionIds.ForEach(subsectionId =>
                 {
-                    var result = _kuralContext.Kurals.Where(x => x.CgId == subsectionId).ToList();
-                    if (result == null) throw new Exception("Error in retrieve kurals. Please contact admin");
+                    var retrieveddata = _kuralContext.Kurals.Where(x => x.CgId == subsectionId).ToList();
+                    if (retrieveddata == null) throw new Exception("Error in retrieve kurals. Please contact admin");
+                    var result = _mapper.Map<List<KuralDto>>(retrieveddata);
+                    result.ForEach(ele =>
+                    {
+                        var splitengexp = ele.Transliteration.Split(' ');
+                        ele.TransFirstLine = string.Join(" ", splitengexp.Take(4).ToList());
+                        ele.TransSecondLine = string.Join(" ", splitengexp.TakeLast(3).ToList());
+                    });
                     KuralsList.AddRange(result);
                 });
             }
@@ -200,17 +275,24 @@ namespace Tamil.Thirukkural.Service
             {
                 filterListDto.SectionIds.ForEach(sectionId =>
                 {
-                    var result = _kuralContext.Kurals.Where(x => x.SectionId == sectionId).ToList();
-                    if (result == null) throw new Exception("Error in retrieve kurals. Please contact admin");
+                    var retrieveddata = _kuralContext.Kurals.Where(x => x.SectionId == sectionId).ToList();
+                    if (retrieveddata == null) throw new Exception("Error in retrieve kurals. Please contact admin");
+                    var result = _mapper.Map<List<KuralDto>>(retrieveddata);
+                    result.ForEach(ele =>
+                    {
+                        var splitengexp = ele.Transliteration.Split(' ');
+                        ele.TransFirstLine = string.Join(" ", splitengexp.Take(4).ToList());
+                        ele.TransSecondLine = string.Join(" ", splitengexp.TakeLast(3).ToList());
+                    });
                     KuralsList.AddRange(result);
                 });
             }
 
-            var resulta =  PagedList<Kural>.ToPagedList(KuralsList.Distinct().OrderBy(x => x.KuralId).ToList(),
+            var resultlist =  PagedList<KuralDto>.ToPagedList(KuralsList.Distinct().OrderBy(x => x.KuralId).ToList(),
            filterListDto.PageNumber,
            filterListDto.PageSize);
 
-            return resulta;
+            return resultlist;
 
         }
     }

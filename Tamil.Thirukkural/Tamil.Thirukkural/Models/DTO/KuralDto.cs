@@ -3,13 +3,15 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace Tamil.Thirukkural.Models.DB
+namespace Tamil.Thirukkural.Models.DTO
 {
-    public partial class Kural
+    public partial class KuralDto
     {
         public string Section { get; set; }
         public string FirstLine { get; set; }
         public string SecondLine { get; set; }
+        public string TransFirstLine { get; set; }
+        public string TransSecondLine { get; set; }
         public string DefinitionMuVa { get; set; }
         public string DefinitionPapaiya { get; set; }
         public string DefinitionKalaignar { get; set; }

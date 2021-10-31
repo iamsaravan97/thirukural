@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "PBnUyg+3HxFZKmm2BQyzjRRhnhtw75fxGdy6QQNZ368WBYWbJDm8Bw+0g3olhrwChJfRb1IbxagIKARTSCF/Bg==",
+  "dgSpecHash": "FCghG+MxRS05vrzyCgTjFg1lhFnDlqAPZTL3yKVIcJShUvj9uk1GNOZeOc9wzNfB8px0eKBlFwLmvXa9G980LA==",
   "success": true,
   "projectFilePath": "C:\\Project\\Personal\\POC\\MyProject\\angular\\thirukural\\tamil.thirukkural\\tamil.thirukkural\\Tamil.Thirukkural.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\SaravananArumugam\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
+    "C:\\Users\\SaravananArumugam\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
     "C:\\Users\\SaravananArumugam\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\SaravananArumugam\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\SaravananArumugam\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",

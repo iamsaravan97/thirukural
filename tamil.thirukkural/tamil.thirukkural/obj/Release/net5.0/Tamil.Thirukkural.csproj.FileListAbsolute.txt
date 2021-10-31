@@ -59,3 +59,5 @@ C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thi
 C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thirukkural\obj\Release\net5.0\Tamil.Thirukkural.pdb
 C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thirukkural\obj\Release\net5.0\Tamil.Thirukkural.genruntimeconfig.cache
 C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thirukkural\obj\Release\net5.0\Tamil.Thirukkural.csproj.AssemblyReference.cache
+C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thirukkural\bin\Release\net5.0\AutoMapper.dll
+C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thirukkural\bin\Release\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
