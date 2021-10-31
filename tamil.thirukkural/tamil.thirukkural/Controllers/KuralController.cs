@@ -142,7 +142,7 @@ namespace tamil.thirukkural.Controllers
             try
             {
                 if (filterListDto == null) throw new Exception("Parameter is null");
-                var result = _kuralService.GetKuralByList(filterListDto);
+                var result = _kuralService.GetKuralByList(filterListDto).Distinct();
                 return Ok(result);
             }
             catch (Exception ex) { return Ok(ex); };

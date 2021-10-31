@@ -214,7 +214,7 @@ namespace Tamil.Thirukkural.Service
                 });
             }
 
-            return KuralsList.Distinct().OrderBy(x=>x.KuralId).ToList();
+            return KuralsList.GroupBy(x=>x.KuralId).Select(x=>x.First()).OrderBy(x=>x.KuralId).ToList();
 
         }
 
