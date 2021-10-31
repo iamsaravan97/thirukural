@@ -10,6 +10,8 @@ namespace Tamil.Thirukkural.Models.DB
         public string Section { get; set; }
         public string FirstLine { get; set; }
         public string SecondLine { get; set; }
+        public string TransFirstLine { get; set; }
+        public string TransSecondLine { get; set; }
         public string DefinitionMuVa { get; set; }
         public string DefinitionPapaiya { get; set; }
         public string DefinitionKalaignar { get; set; }

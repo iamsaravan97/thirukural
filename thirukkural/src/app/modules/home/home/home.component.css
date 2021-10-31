@@ -29,3 +29,22 @@
 .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate, .mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate{
   background-color:  #3f51b5 !important;
 }
+
+
+/* removed css */
+
+tr.kural-grid-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.kural-grid-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.kural-grid-row td {
+  border-bottom-width: 0;
+}
+
+.kural-grid-detail {
+  overflow: hidden;
+}

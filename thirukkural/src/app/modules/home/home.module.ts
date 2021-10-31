@@ -5,6 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home/home.component';
 import { AngularMaterialModule } from 'src/app/angular-material/angular-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     CommonModule,
     HomeRoutingModule,
     AngularMaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    BrowserAnimationsModule
   ],
   exports:[
     HomeComponent

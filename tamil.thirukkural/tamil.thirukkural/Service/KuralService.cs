@@ -65,6 +65,13 @@ namespace Tamil.Thirukkural.Service
         public IList<Kural> GetAllKural()
         {
             var result = _kuralContext.Kurals.OrderBy(x=>x.KuralId).ToList();
+            result.ForEach(ele =>
+            {
+                var splitengexp = ele.Transliteration.Split(' ');
+                ele.TransFirstLine = string.Join(" ", splitengexp.Take(4).ToList());
+                ele.TransSecondLine = string.Join(" ", splitengexp.TakeLast(3).ToList());
+            });
+
             if (result == null) throw new Exception("Error in retrieve kurals. Please contact developers");
             return result;
         }

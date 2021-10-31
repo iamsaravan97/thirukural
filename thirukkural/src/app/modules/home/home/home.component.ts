@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 
@@ -13,7 +14,14 @@ import { KuralService } from 'src/app/service/kural.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class HomeComponent implements OnInit {
 
@@ -34,12 +42,18 @@ export class HomeComponent implements OnInit {
   trans_sections : string = "பால்கள்"
   trans_subsections : string = "இயல்கள்"
   trans_kuralno : string = "குறள் எண்"
-  trans_kural : string = "குறள்கள்"
+  trans_kural : string = "குறள்கள்";
+  trans_muva : string = "மு.வ உரை";
+  trans_kalaignar : string = "கலைஞர் உரை";
+  trans_pappaiyaa : string = "சாலமன் பாப்பையா உரை";
+  trans_engcouplet : string = "ஆங்கில வழியில்";
+  trans_engexp : string = "ஆங்கில உரை";
+  trans_transliteration : string = "ஆங்கில உச்சரிப்பு";
 
   //#endregion
 
   //#region grid setup
-  displayedColumns : string[] = ['Id','Kural']
+  displayedColumns : string[] = [this.trans_kuralno,this.trans_kural,this.trans_transliteration]
 
   dataSource : MatTableDataSource<Kural>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
