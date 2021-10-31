@@ -2,6 +2,8 @@ export class Kural {
     Section: string;
     FirstLine: string;
     SecondLine: string;
+    TransFirstLine : string;
+    TransSecondLine : string;
     DefinitionMuVa: string;
     DefinitionPapaiya: string;
     DefinitionKalaignar: string;
