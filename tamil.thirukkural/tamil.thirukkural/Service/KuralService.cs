@@ -57,13 +57,13 @@ namespace Tamil.Thirukkural.Service
         public IList<CategoriesDto> GetSubSectionListbySectionId(int sectionId)
         {
 
-            var result = _kuralContext.Kurals.Where(x => x.CgId == sectionId).ToList()
+            var result = _kuralContext.Kurals.Where(x => x.SectionId == sectionId).ToList()
                 .OrderBy(x => x.CgId)
                 .GroupBy(x => x.CgId)
                 .Select(g => new CategoriesDto()
                 {
                     Id = g.Key,
-                    Name = g.FirstOrDefault().Chapter,
+                    Name = g.FirstOrDefault().Cg,
                     Count = g.Count()
                 }).ToList();
             if (result == null) throw new Exception("Error in retrieve List. Please contact developers");

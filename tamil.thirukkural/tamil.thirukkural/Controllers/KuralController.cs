@@ -137,7 +137,7 @@ namespace tamil.thirukkural.Controllers
         }
 
         [HttpGet]
-        [Route("GetChaptersBySection")]
+        [Route("GetSubSectionsBySection")]
         public IActionResult GetSubSectionsBySectionId(int sectiondId)
         {
             try
