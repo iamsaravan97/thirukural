@@ -6,11 +6,13 @@ import { HomeComponent } from './home/home.component';
 import { AngularMaterialModule } from 'src/app/angular-material/angular-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TreeFilterComponent } from './tree-filter/tree-filter.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    TreeFilterComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule
   ],
   exports:[
-    HomeComponent
+    HomeComponent,
+    TreeFilterComponent
   ]
 })
 export class HomeModule { }

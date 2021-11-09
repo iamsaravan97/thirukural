@@ -9,7 +9,11 @@ import {MatTableModule} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-
+import {MatTreeModule} from '@angular/material/tree';
+import { MatButtonModule } from '@angular/material/button';
+import { CdkTreeModule } from '@angular/cdk/tree';
+import { MatPseudoCheckboxModule } from '@angular/material/core';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [],
@@ -22,7 +26,12 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatListModule,
     MatTableModule,
     MatPaginatorModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatTreeModule,
+    MatButtonModule,
+    CdkTreeModule,
+    MatPseudoCheckboxModule,
+    MatCheckboxModule
     
   ],
   exports :[
@@ -30,11 +39,15 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatIconModule,
     MatGridListModule,
     MatCardModule,
+    MatButtonModule,
     MatListModule,
     MatTableModule,
     MatPaginatorModule,
-    MatProgressBarModule
-    
+    MatProgressBarModule,
+    MatTreeModule,
+    CdkTreeModule,
+    MatPseudoCheckboxModule,
+    MatCheckboxModule
   ]
 })
 export class AngularMaterialModule { }

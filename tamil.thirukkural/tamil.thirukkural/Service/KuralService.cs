@@ -38,6 +38,38 @@ namespace Tamil.Thirukkural.Service
             return result;
         }
 
+        public IList<CategoriesDto> GetChaptersListbySubSectionId(int subsectionId)
+        {
+
+            var result = _kuralContext.Kurals.Where(x => x.CgId == subsectionId).ToList()
+                .OrderBy(x => x.ChapterId)
+                .GroupBy(x => x.ChapterId)
+                .Select(g => new CategoriesDto()
+                {
+                    Id = g.Key,
+                    Name = g.FirstOrDefault().Chapter,
+                    Count = g.Count()
+                }).ToList();
+            if (result == null) throw new Exception("Error in retrieve List. Please contact developers");
+            return result;
+        }
+
+        public IList<CategoriesDto> GetSubSectionListbySectionId(int sectionId)
+        {
+
+            var result = _kuralContext.Kurals.Where(x => x.CgId == sectionId).ToList()
+                .OrderBy(x => x.CgId)
+                .GroupBy(x => x.CgId)
+                .Select(g => new CategoriesDto()
+                {
+                    Id = g.Key,
+                    Name = g.FirstOrDefault().Chapter,
+                    Count = g.Count()
+                }).ToList();
+            if (result == null) throw new Exception("Error in retrieve List. Please contact developers");
+            return result;
+        }
+
         public IList<CategoriesDto> GetAllSections()
         {
 
@@ -293,7 +325,8 @@ namespace Tamil.Thirukkural.Service
            filterListDto.PageSize);
 
             return resultlist;
-
         }
+
+
     }
 }

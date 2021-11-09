@@ -111,6 +111,7 @@ namespace tamil.thirukkural.Controllers
             catch (Exception ex) { return Ok(ex); };
         }
 
+
         [HttpGet]
         [Route("GetSections")]
         public IActionResult GetSections()
@@ -134,6 +135,31 @@ namespace tamil.thirukkural.Controllers
             }
             catch (Exception ex) { return Ok(ex); };
         }
+
+        [HttpGet]
+        [Route("GetChaptersBySection")]
+        public IActionResult GetSubSectionsBySectionId(int sectiondId)
+        {
+            try
+            {
+                var result = _kuralService.GetSubSectionListbySectionId(sectiondId).ToList();
+                return Ok(result);
+            }
+            catch (Exception ex) { return Ok(ex); };
+        }
+
+        [HttpGet]
+        [Route("GetChaptersBySubSection")]
+        public IActionResult GetChaptersBySubSectionId(int subSectionId)
+        {
+            try
+            {
+                var result = _kuralService.GetChaptersListbySubSectionId(subSectionId).ToList();
+                return Ok(result);
+            }
+            catch (Exception ex) { return Ok(ex); };
+        }
+
 
         [HttpPost]
         [Route("KuralsByList")]

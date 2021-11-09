@@ -3,7 +3,7 @@
 	<div class="content" fxLayoutGap="10px" fxLayout="row" fxLayout.xs="column" fxFlexFill>
 		
 		<div class="layout-height" fxFlex="20" fxFlex.xs="55">
-			<mat-card class="t_height_100">
+			<!-- <mat-card class="t_height_100">
 				<div mat-subheader>{{trans_categories}} ({{categories.length}}) </div>
 				<div class="t_height_90 scrollstyle t_overflow-y_auto">
 					<mat-selection-list #selectcategories >
@@ -13,10 +13,13 @@
 					  </mat-selection-list>
 					
 				</div>
-			</mat-card>
+			</mat-card> -->
+			<mat-card class="t_height_100">
+				<app-tree-filter></app-tree-filter>
+				</mat-card>
 		</div>
 
-		<div fxFlex="60" class="layout-height">
+		<div fxFlex="80" class="layout-height">
 		
 			<mat-card class="t_height_100">
 				<div class="t_height_90 scrollstyle t_overflow-y_auto">
@@ -83,7 +86,7 @@
 			</mat-card>
 		</div>
 
-		<div class="layout-height" fxFlex="20" fxFlex.xs="15">
+		<!-- <div class="layout-height" fxFlex="20" fxFlex.xs="15">
 			<mat-card class="t_height_100">
 				<div mat-subheader>{{trans_sections}} ({{sections.length}}) </div>
 				<div class="t_height_30 ">
@@ -106,7 +109,7 @@
 					  </mat-selection-list>
 				</div>
 			</mat-card>
-		</div>
+		</div> -->
 
 	</div>
 </div>

@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   pagesize : number = 10;
   pagesizeoptions : Array<number> = [5, 10, 20];
-  paginationMode : PaginationMode = "Client"; //Server
+  paginationMode : PaginationMode = "Client"; //Server/Client
 
   currentPage : number = 0;
 
@@ -91,9 +91,9 @@ export class HomeComponent implements OnInit {
       PageSize : this.pagesize
     }
     this.loadKurals(filterList);
-    this.loadAllChapters();
-    this.loadAllSections();
-    this.loadAllSubSections();
+   // this.loadAllChapters();
+   // this.loadAllSections();
+    //this.loadAllSubSections();
   }
 
   ngOnInit(): void {
