@@ -118,6 +118,7 @@ export class FilterNode {
   styleUrls: ['./tree-filter.component.css']
 })
 export class TreeFilterComponent{
+  node: FilterNode;
 
   constructor(private kuralService : KuralService) {
     this.treeControl = new FlatTreeControl<FilterNode>(this.getLevel, this.isExpandable);
@@ -136,7 +137,19 @@ export class TreeFilterComponent{
  
   treeControl: FlatTreeControl<FilterNode>;
 
-  dataSource: CategoryDataSource;
+  get dataSource(){
+    return this.dtasource;
+  }
+  set dataSource(value: any) {
+    this.dtasource = value;
+    if(this.initload == true)
+    this.todoItemSelectionToggle(this.node);
+    this.initload = true;
+  }
+
+
+  dtasource: CategoryDataSource;
+  initload : boolean = false;
 
   getLevel = (node: FilterNode) => node.level;
 
@@ -208,6 +221,7 @@ export class TreeFilterComponent{
   /** Toggle the to-do item selection. Select/deselect all the descendants node */
   todoItemSelectionToggle(node: FilterNode): void {
     this.checklistSelection.toggle(node);
+    this.node = node;
     const descendants = this.treeControl.getDescendants(node);
     this.checklistSelection.isSelected(node)
       ? this.checklistSelection.select(...descendants)
