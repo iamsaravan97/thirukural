@@ -83,8 +83,7 @@ export class FilterNode {
           // If no children, or cannot find the node, no op
           return;
         }
-    
-      
+  
         setTimeout(() => {
           if (expand) {
             const nodes = children.map(
