@@ -15,8 +15,10 @@
 				</div>
 			</mat-card> -->
 			<mat-card class="t_height_100">
-				<app-tree-filter></app-tree-filter>
-				</mat-card>
+				
+				<app-tree-filter  (onChangeFilter)="onChangeFilter($event)"></app-tree-filter>
+		
+			</mat-card>
 		</div>
 
 		<div fxFlex="80" class="layout-height">

@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { Categories } from 'src/app/model/categories';
+import { FilterDto } from 'src/app/model/filterdto';
 import { FilterListDto } from 'src/app/model/filterlis';
 import { Kural } from 'src/app/model/kural';
 import { PagedList } from 'src/app/model/pagedresults';
@@ -247,6 +248,10 @@ export class HomeComponent implements OnInit {
       })
     }
     this.loadKurals(this.filterList);
+  }
+
+  onChangeFilter(e:FilterDto){
+    console.log(e);
   }
 
 

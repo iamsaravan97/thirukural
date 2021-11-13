@@ -1,9 +1,10 @@
-import { CollectionViewer, DataSource, SelectionChange } from '@angular/cdk/collections';
+import { CollectionViewer, DataSource, SelectionChange, SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, EventEmitter, Injectable, OnInit, Output } from '@angular/core';
 import { BehaviorSubject, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Categories } from 'src/app/model/categories';
+import { FilterDto } from 'src/app/model/filterdto';
 import { Kural } from 'src/app/model/kural';
 import { KuralService } from 'src/app/service/kural.service';
 
@@ -143,6 +144,102 @@ export class TreeFilterComponent{
 
   hasChild = (_: number, _nodeData: FilterNode) => _nodeData.expandable;
 
+  checklistSelection = new SelectionModel<FilterNode>(true /* multiple */);
+
+
+  //#region  filter selction methd
+  checkRootNodeSelection(node: FilterNode): void {
+    const nodeSelected = this.checklistSelection.isSelected(node);
+    const descendants = this.treeControl.getDescendants(node);
+    const descAllSelected =
+      descendants.length > 0 &&
+      descendants.every(child => {
+        return this.checklistSelection.isSelected(child);
+      });
+    if (nodeSelected && !descAllSelected) {
+      this.checklistSelection.deselect(node);
+    } else if (!nodeSelected && descAllSelected) {
+      this.checklistSelection.select(node);
+    }
+  }
+
+  checkAllParentsSelection(node: FilterNode): void {
+    let parent: FilterNode | null = this.getParentNode(node);
+    while (parent) {
+      this.checkRootNodeSelection(parent);
+      parent = this.getParentNode(parent);
+    }
+  }
+
+    /* Get the parent node of a node */
+    getParentNode(node: FilterNode): FilterNode | null {
+      const currentLevel = this.getLevel(node);
+      if (currentLevel < 1) {
+        return null;
+      }
+      const startIndex = this.treeControl.dataNodes.indexOf(node) - 1;
+      for (let i = startIndex; i >= 0; i--) {
+        const currentNode = this.treeControl.dataNodes[i];
+        if (this.getLevel(currentNode) < currentLevel) {
+          return currentNode;
+        }
+      }
+      return null;
+    }
+  
+    /** Whether all the descendants of the node are selected. */
+  descendantsAllSelected(node: FilterNode): boolean {
+    const descendants = this.treeControl.getDescendants(node);
+    const descAllSelected =
+      descendants.length > 0 &&
+      descendants.every(child => {
+        return this.checklistSelection.isSelected(child);
+      });
+    return descAllSelected;
+  }
+
+  /** Whether part of the descendants are selected */
+  descendantsPartiallySelected(node: FilterNode): boolean {
+    const descendants = this.treeControl.getDescendants(node);
+    const result = descendants.some(child => this.checklistSelection.isSelected(child));
+    return result && !this.descendantsAllSelected(node);
+  }
+
+  /** Toggle the to-do item selection. Select/deselect all the descendants node */
+  todoItemSelectionToggle(node: FilterNode): void {
+    this.checklistSelection.toggle(node);
+    const descendants = this.treeControl.getDescendants(node);
+    this.checklistSelection.isSelected(node)
+      ? this.checklistSelection.select(...descendants)
+      : this.checklistSelection.deselect(...descendants);
+
+    // Force update for the parent
+    descendants.forEach(child => this.checklistSelection.isSelected(child));
+    this.checkAllParentsSelection(node);
+  }
+
+  /** Toggle a leaf to-do item selection. Check all the parents to see if they changed */
+  todoLeafItemSelectionToggle(node: FilterNode): void {
+    this.checklistSelection.toggle(node);
+    this.checkAllParentsSelection(node);
+  }
+
+
+  
+
+  @Output() onChangeFilter = new EventEmitter<FilterDto>();  
+
+  changeFilterValue(node : any){
+    this.checklistSelection.toggle(node);
+    this.checkAllParentsSelection(node);
+    let filterdto = <FilterDto>{
+      category : node.item,
+      level : node.level
+    }
+    this.onChangeFilter.emit(filterdto);
+  }
+
+  //#endregion
 
 
 
