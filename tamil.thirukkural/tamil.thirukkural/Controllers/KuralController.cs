@@ -149,6 +149,18 @@ namespace tamil.thirukkural.Controllers
         }
 
         [HttpGet]
+        [Route("GetSectionsByLevel")]
+        public IActionResult GetSectionsByLevel(int id,int level)
+        {
+            try
+            {
+                var result = _kuralService.GetSectionsByLevel(id,level);
+                return Ok(result);
+            }
+            catch (Exception ex) { return Ok(ex); };
+        }
+
+        [HttpGet]
         [Route("GetChaptersBySubSection")]
         public IActionResult GetChaptersBySubSectionId(int subSectionId)
         {

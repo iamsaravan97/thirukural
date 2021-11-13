@@ -23,5 +23,10 @@ namespace Tamil.Thirukkural.Service
         public IList<KuralDto> GetKuralByList(FilterListDto filterListDto);
         public PagedList<KuralDto> GetKuralPagedResults(FilterListDto filterListDto);
 
+        public IList<CategoriesDto> GetSectionsByLevel(int id, int level);
+      
+
+        
+
     }
 }

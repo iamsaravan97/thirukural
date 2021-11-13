@@ -97,6 +97,16 @@ namespace Tamil.Thirukkural.Service
             return result;
         }
 
+        public IList<CategoriesDto> GetSectionsByLevel(int id, int level)
+        {
+            if(level == 0)
+                return GetSubSectionListbySectionId(id);
+            if (level == 1)
+                return GetChaptersListbySubSectionId(id);
+            else
+                return null; 
+        }
+
         public IList<KuralDto> GetAllKural()
         {
             var retrieveddata = _kuralContext.Kurals.OrderBy(x=>x.KuralId).ToList();
@@ -326,6 +336,10 @@ namespace Tamil.Thirukkural.Service
 
             return resultlist;
         }
+
+     
+
+
 
 
     }

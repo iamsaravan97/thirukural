@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   pagesize : number = 10;
   pagesizeoptions : Array<number> = [5, 10, 20];
-  paginationMode : PaginationMode = "Client"; //Server/Client
+  paginationMode : PaginationMode = "Server"; //Server/Client
 
   currentPage : number = 0;
 
@@ -90,7 +90,7 @@ export class HomeComponent implements OnInit {
       PageNumber : 1,
       PageSize : this.pagesize
     }
-    this.loadKurals(filterList);
+    //this.loadKurals(filterList);
    // this.loadAllChapters();
    // this.loadAllSections();
     //this.loadAllSubSections();

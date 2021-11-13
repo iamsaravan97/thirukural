@@ -4,10 +4,11 @@ import { Component, Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Categories } from 'src/app/model/categories';
+import { Kural } from 'src/app/model/kural';
 import { KuralService } from 'src/app/service/kural.service';
 
 /** Flat node with expandable and level information */
-export class DynamicFlatNode {
+export class FilterNode {
   constructor(
     public item: Categories,
     public level = 1,
@@ -17,69 +18,37 @@ export class DynamicFlatNode {
 }
 
 
+
 /**
- * Database for dynamic data. When expanding a node in the tree, the data source will need to fetch
- * the descendants data from the database.
- */
- @Injectable({providedIn: 'root'})
-
- export class DynamicDatabase {
-   dataMap = new Map<string, string[]>([
-     ['Fruits', ['Apple', 'Orange', 'Banana']],
-     ['Vegetables', ['Tomato', 'Potato', 'Onion']],
-     ['Apple', ['Fuji', 'Macintosh']],
-     ['Onion', ['Yellow', 'White', 'Purple']],
-     ['Banana',['Rasthali','Papaya']]
-   ]);
-
-   rootLevelNodes: string[] = ['Fruits', 'Vegetables'];
- 
-   /** Initial data from database */
-  //  initialData(): DynamicFlatNode[] {
-
-  //    return this.rootLevelNodes.map(name => new DynamicFlatNode(name, 0, true));
-  //  }
-   
- 
-   getChildren(node: string): string[] | undefined {
-     return this.dataMap.get(node);
-   }
- 
-   isExpandable(node: string): boolean {
-     return this.dataMap.has(node);
-   }
- }
-
- /**
  * File database, it can build a tree structured Json object from string.
  * Each node in Json object represents a file or a directory. For a file, it has filename and type.
  * For a directory, it has filename and children (a list of files or directories).
  * The input will be a json object string, and the output is a list of `FileNode` with nested
  * structure.
  */
-export class DynamicDataSource implements DataSource<DynamicFlatNode> {
-  dataChange = new BehaviorSubject<DynamicFlatNode[]>([]);
+ export class CategoryDataSource implements DataSource<FilterNode> {
+  dataChange = new BehaviorSubject<FilterNode[]>([]);
 
-  get data(): DynamicFlatNode[] {
+  get data(): FilterNode[] {
     return this.dataChange.value;
   }
-  set data(value: DynamicFlatNode[]) {
+  set data(value: FilterNode[]) {
     this._treeControl.dataNodes = value;
     this.dataChange.next(value);
   }
 
   constructor(
-    private _treeControl: FlatTreeControl<DynamicFlatNode>,
-    private _database: DynamicDatabase,
+    private _treeControl: FlatTreeControl<FilterNode>,
+    private _kuralService : KuralService
   ) {}
 
-  connect(collectionViewer: CollectionViewer): Observable<DynamicFlatNode[]> {
+  connect(collectionViewer: CollectionViewer): Observable<FilterNode[]> {
     this._treeControl.expansionModel.changed.subscribe(change => {
       if (
-        (change as SelectionChange<DynamicFlatNode>).added ||
-        (change as SelectionChange<DynamicFlatNode>).removed
+        (change as SelectionChange<FilterNode>).added ||
+        (change as SelectionChange<FilterNode>).removed
       ) {
-        this.handleTreeControl(change as SelectionChange<DynamicFlatNode>);
+        this.handleTreeControl(change as SelectionChange<FilterNode>);
       }
     });
 
@@ -89,7 +58,7 @@ export class DynamicDataSource implements DataSource<DynamicFlatNode> {
   disconnect(collectionViewer: CollectionViewer): void {}
 
   /** Handle expand/collapse behaviors */
-  handleTreeControl(change: SelectionChange<DynamicFlatNode>) {
+  handleTreeControl(change: SelectionChange<FilterNode>) {
     if (change.added) {
       change.added.forEach(node => this.toggleNode(node, true));
     }
@@ -104,38 +73,43 @@ export class DynamicDataSource implements DataSource<DynamicFlatNode> {
   /**
    * Toggle the node, remove from display list
    */
-  toggleNode(node: DynamicFlatNode, expand: boolean) {
-    const children = this._database.getChildren(node.item.Name);
-    const index = this.data.indexOf(node);
-    if (!children || index < 0) {
-      // If no children, or cannot find the node, no op
-      return;
-    }
-
+  toggleNode(node: FilterNode, expand: boolean) {
     node.isLoading = true;
-
-    setTimeout(() => {
-      if (expand) {
-        const nodes = children.map(
-          name => new DynamicFlatNode(node.item, node.level + 1, this._database.isExpandable(name)),
-        );
-        this.data.splice(index + 1, 0, ...nodes);
-      } else {
-        let count = 0;
-        for (
-          let i = index + 1;
-          i < this.data.length && this.data[i].level > node.level;
-          i++, count++
-        ) {}
-        this.data.splice(index + 1, count);
+    this._kuralService.getSectionsByLevel(node.item.Id,node.level).subscribe({
+      next : (result : Categories[])=>{
+        const children = result;
+        const index = this.data.indexOf(node);
+        if (!children || index < 0) {
+          // If no children, or cannot find the node, no op
+          return;
+        }
+    
+      
+        setTimeout(() => {
+          if (expand) {
+            const nodes = children.map(
+              name => new FilterNode(name, node.level + 1,node.level>=1?false:true),
+            );
+            this.data.splice(index + 1, 0, ...nodes);
+          } else {
+            let count = 0;
+            for (
+              let i = index + 1;
+              i < this.data.length && this.data[i].level > node.level;
+              i++, count++
+            ) {}
+            this.data.splice(index + 1, count);
+          }
+    
+          // notify the change
+          this.dataChange.next(this.data);
+          node.isLoading = false;
+        }, 1000);
       }
-
-      // notify the change
-      this.dataChange.next(this.data);
-      node.isLoading = false;
-    }, 1000);
+    });
   }
 }
+
 
  
 @Component({
@@ -143,38 +117,35 @@ export class DynamicDataSource implements DataSource<DynamicFlatNode> {
   templateUrl: './tree-filter.component.html',
   styleUrls: ['./tree-filter.component.css']
 })
+export class TreeFilterComponent{
 
-
-export class TreeFilterComponent implements OnInit {
-
-  constructor(database: DynamicDatabase, private kuralService : KuralService) {
-    this.treeControl = new FlatTreeControl<DynamicFlatNode>(this.getLevel, this.isExpandable);
-    this.dataSource  = new DynamicDataSource(this.treeControl, database);
+  constructor(private kuralService : KuralService) {
+    this.treeControl = new FlatTreeControl<FilterNode>(this.getLevel, this.isExpandable);
+    this.dataSource = new CategoryDataSource(this.treeControl,kuralService);
+   // this.dataSource.data = database.initialData();
     this.getinitialrootsections();
   }
 
   getinitialrootsections(){
     this.kuralService.getAllSections().subscribe({
-      next : (sections : Array<Categories>) =>{
-        this.dataSource.data =  sections.map(section => new DynamicFlatNode(section, 0, true));
-        
-      }
-    })
-  }
-  
+     next : (sections : Array<Categories>) =>{
+       this.dataSource.data =  sections.map(section => new FilterNode(section, 0, true));
+     }
+   })
+ }
+ 
+  treeControl: FlatTreeControl<FilterNode>;
 
-  treeControl: FlatTreeControl<DynamicFlatNode>;
+  dataSource: CategoryDataSource;
 
-  dataSource: DynamicDataSource;
+  getLevel = (node: FilterNode) => node.level;
 
-  getLevel = (node: DynamicFlatNode) => node.level;
+  isExpandable = (node: FilterNode) => node.expandable;
 
-  isExpandable = (node: DynamicFlatNode) => node.expandable;
+  hasChild = (_: number, _nodeData: FilterNode) => _nodeData.expandable;
 
-  hasChild = (_: number, _nodeData: DynamicFlatNode) => _nodeData.expandable;
 
-  ngOnInit(): void {
 
-  }
+
 
 }

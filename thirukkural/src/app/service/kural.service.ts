@@ -84,19 +84,27 @@ export class KuralService {
     )
   }
 
-  public getSubSectionsBySection(sectiondId:any):Observable<Array<Kural>>{
-    return this.httpClient.get<Array<Kural>>(this.endpointURL+"GetSubSectionsBySection?sectiondId="+sectiondId).pipe(
+  public getSubSectionsBySection(sectiondId:any):Observable<Array<Categories>>{
+    return this.httpClient.get<Array<Categories>>(this.endpointURL+"GetSubSectionsBySection?sectiondId="+sectiondId).pipe(
       retry(1),
       catchError(this.httpError)
     )
   }
 
-  public getChaptersBySubSection(subSectionId:any):Observable<Array<Kural>>{
-    return this.httpClient.get<Array<Kural>>(this.endpointURL+"GetChaptersBySubSection?subSectionId="+subSectionId).pipe(
+  public getChaptersBySubSection(subSectionId:any):Observable<Array<Categories>>{
+    return this.httpClient.get<Array<Categories>>(this.endpointURL+"GetChaptersBySubSection?subSectionId="+subSectionId).pipe(
       retry(1),
       catchError(this.httpError)
     )
   }
+
+  public getSectionsByLevel(id:any,level:any):Observable<Array<Categories>>{
+    return this.httpClient.get<Array<Categories>>(this.endpointURL+"GetSectionsByLevel?id="+id+"&level="+level).pipe(
+      retry(1),
+      catchError(this.httpError)
+    )
+  }
+
 
   public getKuralsByList(filterlist:FilterListDto):Observable<Array<Kural>>{
     return this.httpClient.post<Array<Kural>>(this.endpointURL+"KuralsByList",filterlist).pipe(

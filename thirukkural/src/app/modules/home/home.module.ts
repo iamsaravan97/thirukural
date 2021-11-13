@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TreeFilterComponent } from './tree-filter/tree-filter.component';
 
 
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -19,11 +20,12 @@ import { TreeFilterComponent } from './tree-filter/tree-filter.component';
     HomeRoutingModule,
     AngularMaterialModule,
     FlexLayoutModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   exports:[
     HomeComponent,
     TreeFilterComponent
+ 
   ]
 })
 export class HomeModule { }
