@@ -13,6 +13,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { LoadingInterceptor } from './modules/shared/core/interceptors/loading_interceptor';
 import { LoadingserviceService } from './modules/shared/core/services/loadingservice.service';
+import { TreeModule } from '@circlon/angular-tree-component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { LoadingserviceService } from './modules/shared/core/services/loadingser
     SharedModule,
     BrowserAnimationsModule,
     HttpClientModule,
+
   ],
   providers: [LoadingserviceService,{
     provide: HTTP_INTERCEPTORS,

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "FCghG+MxRS05vrzyCgTjFg1lhFnDlqAPZTL3yKVIcJShUvj9uk1GNOZeOc9wzNfB8px0eKBlFwLmvXa9G980LA==",
+  "dgSpecHash": "Litykwx+W9DV8H7R+4uy0USoNVlBBHbfLDyLkjUKE+pnfbQ9JUmh4rgMfy4/umCGSsq8xumnuQrACEWGwPiD/g==",
   "success": true,
   "projectFilePath": "C:\\Project\\Personal\\POC\\MyProject\\angular\\thirukural\\tamil.thirukkural\\tamil.thirukkural\\Tamil.Thirukkural.csproj",
   "expectedPackageFiles": [
@@ -109,7 +109,8 @@
     "C:\\Users\\SaravananArumugam\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\SaravananArumugam\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\SaravananArumugam\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\SaravananArumugam\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\SaravananArumugam\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\SaravananArumugam\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.12\\microsoft.netcore.app.host.win-x64.5.0.12.nupkg.sha512"
   ],
   "logs": []
 }

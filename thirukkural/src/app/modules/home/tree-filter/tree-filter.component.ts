@@ -15,6 +15,7 @@ export class FilterNode {
     public level = 1,
     public expandable = false,
     public isLoading = false,
+    public isSelected = false
   ) {}
 }
 
@@ -88,7 +89,7 @@ export class FilterNode {
         setTimeout(() => {
           if (expand) {
             const nodes = children.map(
-              name => new FilterNode(name, node.level + 1,node.level>=1?false:true),
+              name => new FilterNode(name, node.level + 1,node.level>=1?false:true,false,node.isSelected?true:false),
             );
             this.data.splice(index + 1, 0, ...nodes);
           } else {
@@ -223,9 +224,14 @@ export class TreeFilterComponent{
     this.checklistSelection.toggle(node);
     this.node = node;
     const descendants = this.treeControl.getDescendants(node);
-    this.checklistSelection.isSelected(node)
-      ? this.checklistSelection.select(...descendants)
-      : this.checklistSelection.deselect(...descendants);
+
+    if(  this.checklistSelection.isSelected(node)){
+      this.checklistSelection.select(...descendants)
+      node.isSelected= true;
+    }else{
+      node.isSelected = false;
+      this.checklistSelection.deselect(...descendants);
+    }
 
     // Force update for the parent
     descendants.forEach(child => this.checklistSelection.isSelected(child));
