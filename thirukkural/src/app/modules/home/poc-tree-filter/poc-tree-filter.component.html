@@ -1,1 +1,10 @@
-<tree-root [nodes]="nodes" [options]="options"></tree-root>
+<!-- <tree-root [nodes]="nodes" [options]="options"></tree-root> -->
+
+<tree-root *ngIf="loadtreeview"
+[nodes]="nodes"
+[options]="options"
+[focused]="true"
+(select)="selectnode($event)"
+(deselect)="deselectnode($event)"
+>
+</tree-root>
