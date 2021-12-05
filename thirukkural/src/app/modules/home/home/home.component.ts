@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   pagesize : number = 10;
   pagesizeoptions : Array<number> = [5, 10, 20];
-  paginationMode : PaginationMode = "Server"; //Server/Client
+  paginationMode : PaginationMode = "Client"; //Server/Client
 
   currentPage : number = 0;
 
@@ -83,15 +83,8 @@ export class HomeComponent implements OnInit {
 
 
   constructor(private _kuralservice: KuralService) { 
-    var filterList = <FilterListDto>{
-      Id : 0,
-      ChapterIds : [],
-      SectionIds :[],
-      SubSectionIds :[],
-      PageNumber : 1,
-      PageSize : this.pagesize
-    }
-    //this.loadKurals(filterList);
+    this.loadfilter();
+    this.loadKurals(this.filterList);
    // this.loadAllChapters();
    // this.loadAllSections();
     //this.loadAllSubSections();
@@ -195,6 +188,17 @@ export class HomeComponent implements OnInit {
   }
   }
 
+  loadfilter(){
+    this.filterList = <FilterListDto>{
+      Id : 0,
+      ChapterIds : [],
+      SectionIds :[],
+      SubSectionIds :[],
+      PageNumber : 1,
+      PageSize : this.pagesize
+    }
+  }
+
   resetfilter(){
     this.filterList = {
       Id : 0,
@@ -250,8 +254,15 @@ export class HomeComponent implements OnInit {
     this.loadKurals(this.filterList);
   }
 
-  onChangeFilter(e:FilterDto){
-    console.log(e);
+  onChangeFilter(filter:any){
+    if(filter.level == 0){
+      this.filterList.SectionIds = [];
+      filter?.ids?.forEach(element => {
+        this.filterList.SectionIds.push(element);
+      });
+    }
+
+    this.loadKurals(this.filterList);
   }
 
 
