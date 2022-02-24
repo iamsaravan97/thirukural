@@ -1,0 +1,17 @@
+.example-tree-invisible {
+    display: none;
+  }
+  
+  .example-tree ul,
+  .example-tree li {
+
+    list-style-type: none;
+  }
+  
+  .checklist-leaf-node {
+    padding-left: 40px;
+  }
+
+  .submit-button {
+    margin-top: 10px;
+  }

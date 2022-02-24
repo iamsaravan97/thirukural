@@ -60,9 +60,10 @@ export class HomeComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   pagesize : number = 10;
   pagesizeoptions : Array<number> = [5, 10, 20];
-  paginationMode : PaginationMode = "Client"; //Server/Client
+  paginationMode : PaginationMode = "Server"; //Server/Client
 
   currentPage : number = 0;
+  panelOpenState : boolean = false;
 
 
 
@@ -84,10 +85,10 @@ export class HomeComponent implements OnInit {
 
   constructor(private _kuralservice: KuralService) { 
     this.loadfilter();
-    this.loadKurals(this.filterList);
-   // this.loadAllChapters();
-   // this.loadAllSections();
-    //this.loadAllSubSections();
+   this.loadKurals(this.filterList);
+   this.loadAllChapters();
+   this.loadAllSections();
+    this.loadAllSubSections();
   }
 
   ngOnInit(): void {
@@ -153,6 +154,7 @@ export class HomeComponent implements OnInit {
   loadKurals(filterList:FilterListDto){
     this.pagesizeoptions = [];
     if(this.paginationMode == "Client"){
+      this.kuralgrid = [];
     let subscription = this._kuralservice.getKuralsByList(filterList).subscribe({
       next : (res : Array<Kural>)=>{
         if(res != null)
@@ -254,15 +256,11 @@ export class HomeComponent implements OnInit {
     this.loadKurals(this.filterList);
   }
 
-  onChangeFilter(filter:any){
-    if(filter.level == 0){
-      this.filterList.SectionIds = [];
-      filter?.ids?.forEach(element => {
-        this.filterList.SectionIds.push(element);
-      });
-    }
-
-    this.loadKurals(this.filterList);
+  onChangeFilter(filter:FilterListDto){
+    this.filterList = filter;
+    this.filterList.PageSize = this.pagesize;
+    this.filterList.PageNumber = 1;
+    this.loadKurals(filter);
   }
 
 

@@ -15,6 +15,7 @@ import { CdkTreeModule } from '@angular/cdk/tree';
 import { MatPseudoCheckboxModule } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [],
@@ -33,7 +34,9 @@ import {MatSliderModule} from '@angular/material/slider';
     CdkTreeModule,
     MatPseudoCheckboxModule,
     MatCheckboxModule,
-    MatSliderModule
+    MatSliderModule,
+    MatExpansionModule
+    
     
   ],
   exports :[
@@ -50,7 +53,9 @@ import {MatSliderModule} from '@angular/material/slider';
     CdkTreeModule,
     MatPseudoCheckboxModule,
     MatCheckboxModule,
-    MatSliderModule
+    MatSliderModule,
+    MatExpansionModule
+    
   ]
 })
 export class AngularMaterialModule { }

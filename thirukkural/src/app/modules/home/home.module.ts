@@ -6,9 +6,8 @@ import { HomeComponent } from './home/home.component';
 import { AngularMaterialModule } from 'src/app/angular-material/angular-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TreeFilterComponent } from './tree-filter/tree-filter.component';
-import { PocTreeFilterComponent } from './poc-tree-filter/poc-tree-filter.component';
 import { TreeModule } from '@circlon/angular-tree-component';
+import { CategoryTreeFilterComponent } from './category-tree-filter/category-tree-filter.component';
 
 
 
@@ -16,8 +15,7 @@ import { TreeModule } from '@circlon/angular-tree-component';
 @NgModule({
   declarations: [
     HomeComponent,
-    TreeFilterComponent,
-    PocTreeFilterComponent
+    CategoryTreeFilterComponent
   ],
   imports: [
     CommonModule,
@@ -28,9 +26,7 @@ import { TreeModule } from '@circlon/angular-tree-component';
     TreeModule
   ],
   exports:[
-    HomeComponent,
-    TreeFilterComponent
- 
+    HomeComponent
   ]
 })
 export class HomeModule { }
