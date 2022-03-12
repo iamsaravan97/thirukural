@@ -257,6 +257,7 @@ export class HomeComponent implements OnInit {
   }
 
   onChangeFilter(filter:FilterListDto){
+    this.loadfilter(); //reset the filter
     this.filterList = filter;
     this.filterList.PageSize = this.pagesize;
     this.filterList.PageNumber = 1;
