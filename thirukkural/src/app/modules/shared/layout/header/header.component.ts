@@ -16,7 +16,8 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
   color  = 'Accent'
   checked = false;
   disabled = false;
-  filtertogglelabel : string = "Standard"
+  filtertogglelabel : string = "Standard";
+  filtertogglePosition : string = "before"
 
   constructor(private loadingservice : LoadingserviceService,
     private changeDetectorRef: ChangeDetectorRef, private media: MediaMatcher) {
@@ -61,7 +62,16 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   categoryFilterChange(e){
-     console.log(e.checked);
+    if(e?.checked){
+      this.filtertogglePosition = "after"
+      this.filtertogglelabel = "Custom";
+      this.checked = true;
+    }else{
+      this.checked = false;
+      this.filtertogglePosition = "before"
+      this.filtertogglelabel = "Standard";
+    }
+   
   }
 
 }

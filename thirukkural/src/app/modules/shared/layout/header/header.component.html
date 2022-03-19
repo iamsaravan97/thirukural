@@ -81,7 +81,7 @@
         <div class="t_row t_justifycontentSpaceBetween">
           <h3 mat-subheader>Category</h3>
           <mat-slide-toggle
-          [labelPosition]="'before'"
+          [labelPosition]="filtertogglePosition"
           (change)="categoryFilterChange($event)"
           [color]="color"
           [checked]="checked"
@@ -91,9 +91,9 @@
         </div>
     
 
-        <mat-card>
-          <app-category-tree-filter (onChangeFilter)="onChangeFilter($event)"></app-category-tree-filter>
-        </mat-card>
+
+        <app-category-tree-filter *ngIf="checked" (onChangeFilter)="onChangeFilter($event)"></app-category-tree-filter>
+        <app-kuralfilter *ngIf="!checked"></app-kuralfilter>
 
 
        

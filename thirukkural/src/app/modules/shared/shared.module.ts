@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AngularMaterialModule } from 'src/app/angular-material/angular-material.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CategoryTreeFilterComponent } from './kuralfilter/category-tree-filter/category-tree-filter.component';
+import { KuralfilterComponent } from './kuralfilter/kuralfilter/kuralfilter.component';
 
 
 
@@ -14,7 +15,8 @@ import { CategoryTreeFilterComponent } from './kuralfilter/category-tree-filter/
   declarations: [
     HeaderComponent,
     FooterComponent,
-    CategoryTreeFilterComponent
+    CategoryTreeFilterComponent,
+    KuralfilterComponent
   ],
   imports: [
     CommonModule,

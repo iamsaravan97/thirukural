@@ -1,0 +1,57 @@
+<div class="layout-height" fxFlex="20" fxFlex.xs="15">
+    <mat-card  class="t_height_100 scrollstyle t_overflow-y_auto">
+    <mat-accordion >
+        <mat-expansion-panel >
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{trans_sections}} ({{sections.length}}) 
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <mat-selection-list  class="t_height_100 scrollstyle t_overflow-y_auto" #selectsections>
+                <mat-list-option (click)="filterbySectionId($event, selectsections?.selectedOptions.selected)"
+                    [value]="section" *ngFor="let section of sections">
+                    {{section.Name}} ({{section.Count}})
+                </mat-list-option>
+            </mat-selection-list>
+
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{trans_subsections}} ({{subsections.length}})
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="t_overflow-y_auto">
+
+                <mat-selection-list  class="t_height_100 scrollstyle t_overflow-y_auto" #selectsubsections>
+                    <mat-list-option
+                        (click)="filterbySubsectionId($event, selectsubsections?.selectedOptions.selected)"
+                        [value]="subsection" *ngFor="let subsection of subsections">
+                        {{subsection.Name}} ({{subsection.Count}})
+                    </mat-list-option>
+                </mat-selection-list>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{trans_categories}} ({{categories.length}}) 
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="t_height_90 scrollstyle t_overflow-y_auto">
+                <mat-selection-list  class="t_height_100 scrollstyle t_overflow-y_auto" #selectcategories >
+                    <mat-list-option (click)="filterbyChapterId($event, selectcategories?.selectedOptions.selected)" [value]="category" *ngFor="let category of categories" >
+                    {{category.Name}} ({{category.Count}})
+                    </mat-list-option>
+                  </mat-selection-list>
+                
+            </div>
+        </mat-expansion-panel>
+
+    </mat-accordion>
+</mat-card >
+
+
+</div>
