@@ -1,6 +1,7 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { LoadingserviceService } from '../../core/services/loadingservice.service';
+import { SharedService } from '../../core/services/shared.service';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +20,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
   filtertogglelabel : string = "Standard";
   filtertogglePosition : string = "before"
 
-  constructor(private loadingservice : LoadingserviceService,
+  constructor(private loadingservice : LoadingserviceService, private sharedService : SharedService,
     private changeDetectorRef: ChangeDetectorRef, private media: MediaMatcher) {
     this.loadingservice.showLoaderEvent.subscribe(x=>{
 
@@ -62,6 +63,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   categoryFilterChange(e){
+    this.sharedService.onResetFilter(true);
     if(e?.checked){
       this.filtertogglePosition = "after"
       this.filtertogglelabel = "Custom";

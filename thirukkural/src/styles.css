@@ -3,10 +3,18 @@
 @import '~@circlon/angular-tree-component/css/angular-tree-component.css';
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow-y: hidden; }
+body {
+     margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    overflow-y: hidden;      /* "auto" or "thin" */
+ }
 
 .t_order_2{
     order : 2
+}
+
+.t_backgroundBlack{
+    background-color: black;
 }
 
 .t_width_100{
@@ -48,3 +56,26 @@ z-index: 999;
 .t_justifycontentSpaceBetween{
     justify-content: space-between;
 }
+
+  .scrollstyle{
+    scrollbar-width: 10px;
+    scrollbar-width: thin;
+    border-radius: 20px;
+    scroll-behavior: auto;
+  }
+  
+  .scrollstyle::-webkit-scrollbar-thumb {   
+    border-radius: 30px;
+    background: #dadada;
+    box-shadow: inset 2px 2px 2px rgba(255,255,255,.25), inset -2px -2px 2px rgba(0,0,0,.25);}
+   
+    .scrollstyle::-webkit-scrollbar-track {     
+    background-color: #fff;
+    background: linear-gradient(to right,#201c29,#201c29 1px,#100e17 1px,#100e17);
+  }
+  /* Works on Chrome, Edge, and Safari */
+
+
+  ::-webkit-scrollbar {
+    width: 10px;          
+ }

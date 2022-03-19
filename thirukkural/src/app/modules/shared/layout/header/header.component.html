@@ -9,7 +9,7 @@
 
     <a class="navbar-brand" [routerLink]="['/']" matTooltip="Home">
       <h1>
-        angular-material-template
+        Agara Mudhala
       </h1>
     </a>
 
@@ -90,13 +90,8 @@
         </mat-slide-toggle>
         </div>
     
-
-
-        <app-category-tree-filter *ngIf="checked" (onChangeFilter)="onChangeFilter($event)"></app-category-tree-filter>
-        <app-kuralfilter *ngIf="!checked"></app-kuralfilter>
-
-
-       
+        <app-category-tree-filter class="scrollstyle t_overflow-y_auto" *ngIf="checked" (onChangeFilter)="onChangeFilter($event)"></app-category-tree-filter>
+        <app-kuralfilter class="scrollstyle t_overflow-y_auto" *ngIf="!checked"></app-kuralfilter>
       </mat-nav-list>
 
     </mat-sidenav>

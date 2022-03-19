@@ -87,14 +87,17 @@ export class HomeComponent implements OnInit {
   constructor(private _kuralservice: KuralService,private sharedService : SharedService) { 
     this.loadfilter();
    this.loadKurals(this.filterList);
-   this.loadAllChapters();
-   this.loadAllSections();
-    this.loadAllSubSections();
   }
 
   ngOnInit(): void {
     this.sharedService.onChangeFilterEmit.subscribe((result : FilterListDto)=>{
       this.onChangeFilter(result);
+    })
+    this.sharedService.resetFilerEmit.subscribe((result : FilterListDto)=>{
+      if(result){
+      this.loadfilter();
+      this.loadKurals(this.filterList);
+      }
     })
   }
 
@@ -104,56 +107,6 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  loadAllChapters(){
-    this.categories = [];
-    let subscrition = this._kuralservice.getAllChapters().subscribe({
-      next : (res : Array<Categories>)=>{
-        console.log(res);
-        if(res != null){
-          this.categories = [...res];
-        }
-      },
-      error : (error)=>{
-        console.log(error);
-      }
-
-    })
-    this.subscriptions.push(subscrition);
-  }
-
-  loadAllSections(){
-    this.sections = [];
-    let subscrition = this._kuralservice.getAllSections().subscribe({
-      next : (res : Array<Categories>)=>{
-        console.log(res);
-        if(res != null){
-          this.sections = [...res];
-        }
-      },
-      error : (error)=>{
-        console.log(error);
-      }
-
-    })
-    this.subscriptions.push(subscrition);
-  }
-
-  loadAllSubSections(){
-    this.subsections = [];
-    let subscrition = this._kuralservice.getAllSubSections().subscribe({
-      next : (res : Array<Categories>)=>{
-        console.log(res);
-        if(res != null){
-          this.subsections = [...res];
-        }
-      },
-      error : (error)=>{
-        console.log(error);
-      }
-
-    })
-    this.subscriptions.push(subscrition);
-  }
 
   loadKurals(filterList:FilterListDto){
     this.pagesizeoptions = [];
@@ -226,39 +179,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  filterbyChapterId(e,selectedcategories:Array<any>){
-    this.filterList.ChapterIds = [];
-    //this.resetfilter();
-    if(selectedcategories.length != 0 ){
-      selectedcategories.forEach(ele=>{
-        this.filterList.ChapterIds.push(ele.value.Id);
-      })
-    }
-    this.loadKurals(this.filterList);
-  }
 
-
-  filterbySectionId(e,selectedsection:Array<any>){
-    this.filterList.SectionIds = [];
-  //  this.resetfilter();
-    if(selectedsection.length != 0 ){
-      selectedsection.forEach(ele=>{
-        this.filterList.SectionIds.push(ele.value.Id);
-      })
-    }
-    this.loadKurals(this.filterList);
-  }
-
-  filterbySubsectionId(e,selectedsubsection:Array<any>){
-    this.filterList.SubSectionIds = [];
-    //this.resetfilter();
-    if(selectedsubsection.length != 0 ){
-      selectedsubsection.forEach(ele=>{
-        this.filterList.SubSectionIds.push(ele.value.Id);
-      })
-    }
-    this.loadKurals(this.filterList);
-  }
 
   onChangeFilter(filter:FilterListDto){
     this.loadfilter(); //reset the filter

@@ -14,4 +14,10 @@ export class SharedService {
   onChangeFilter(filterList:FilterListDto){
     this.onChangeFilterEmit.emit(filterList);
   }
+
+  @Output() resetFilerEmit = new EventEmitter<any>();
+
+  onResetFilter(e){
+    this.resetFilerEmit.emit(e);
+  }
 }
