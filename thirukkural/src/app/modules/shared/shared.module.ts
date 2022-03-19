@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
-import { ContentComponent } from './content/content.component';
 import { RouterModule } from '@angular/router';
 import { AngularMaterialModule } from 'src/app/angular-material/angular-material.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CategoryTreeFilterComponent } from './kuralfilter/category-tree-filter/category-tree-filter.component';
 
 
 
@@ -14,18 +14,17 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
   declarations: [
     HeaderComponent,
     FooterComponent,
-    ContentComponent,
-  
+    CategoryTreeFilterComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
-    AngularMaterialModule
+    AngularMaterialModule,
   ],
   exports:[
     HeaderComponent,
     FooterComponent,
-    ContentComponent,
+    CategoryTreeFilterComponent
   ],
 
 })

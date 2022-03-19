@@ -9,17 +9,6 @@
 
   }
 
-.scrollstyle::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-  border-radius: 30px;
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.scrollstyle::-webkit-scrollbar-thumb {
-  border-radius: 30px;
-  background-color: #babdb7 
-}
 
 .mat-column-Id{
   width: 20%;

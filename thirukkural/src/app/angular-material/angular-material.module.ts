@@ -16,6 +16,9 @@ import { MatPseudoCheckboxModule } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [],
@@ -35,8 +38,10 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatPseudoCheckboxModule,
     MatCheckboxModule,
     MatSliderModule,
-    MatExpansionModule
-    
+    MatExpansionModule,
+    MatSidenavModule,
+    MatMenuModule,
+    MatSlideToggleModule
     
   ],
   exports :[
@@ -54,8 +59,10 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatPseudoCheckboxModule,
     MatCheckboxModule,
     MatSliderModule,
-    MatExpansionModule
-    
+    MatExpansionModule,
+    MatSidenavModule,
+    MatMenuModule,
+    MatSlideToggleModule
   ]
 })
 export class AngularMaterialModule { }

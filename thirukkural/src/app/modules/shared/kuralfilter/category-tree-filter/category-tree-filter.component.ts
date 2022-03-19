@@ -4,6 +4,7 @@ import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { Categories } from 'src/app/model/categories';
 import { FilterListDto } from 'src/app/model/filterlis';
 import { KuralService } from 'src/app/service/kural.service';
+import { SharedService } from '../../core/services/shared.service';
 
 interface CategoryNode {
   category?: Categories;
@@ -45,7 +46,7 @@ export class CategoryTreeFilterComponent implements OnInit {
   hasChild = (_: number, _nodeData: CategoryNode) => _nodeData.expandable;
 
 
-  constructor(private kuralService: KuralService) {
+  constructor(private kuralService: KuralService,private sharedService : SharedService) {
 
     this.getinitialrootsections();
 
@@ -332,7 +333,7 @@ export class CategoryTreeFilterComponent implements OnInit {
   }
 
   changeFilterValue() {
-    this.onChangeFilter.emit(this.filterList);
+    this.sharedService.onChangeFilter(this.filterList);
   }
 
 

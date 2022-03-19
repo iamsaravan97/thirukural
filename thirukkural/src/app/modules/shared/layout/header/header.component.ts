@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { LoadingserviceService } from '../../core/services/loadingservice.service';
 
 @Component({
@@ -6,15 +7,26 @@ import { LoadingserviceService } from '../../core/services/loadingservice.servic
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
   showloader : boolean = false;
   counter: number = 0;
+  private _mobileQueryListener: () => void;
+  mobileQuery: MediaQueryList;
+  color  = 'Accent'
+  checked = false;
+  disabled = false;
+  filtertogglelabel : string = "Standard"
 
-  constructor(private loadingservice : LoadingserviceService) {
+  constructor(private loadingservice : LoadingserviceService,
+    private changeDetectorRef: ChangeDetectorRef, private media: MediaMatcher) {
     this.loadingservice.showLoaderEvent.subscribe(x=>{
 
-        
+      this.mobileQuery = this.media.matchMedia('(max-width: 1000px)');
+      this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+      // tslint:disable-next-line: deprecation
+      this.mobileQuery.addListener(this._mobileQueryListener);
+
         if(x==true){
           this.showloader = x;
            this.counter = this.counter = this.counter+1;
@@ -22,11 +34,34 @@ export class HeaderComponent implements OnInit {
         else this.counter = this.counter = this.counter-1;
         if(this.counter == 0)
          this.showloader = false;
-
+         
     })
   }
 
   ngOnInit(): void {
+  }
+
+  
+
+
+  ngAfterViewInit(): void {
+    this.changeDetectorRef.detectChanges();
+}
+
+
+  ngOnDestroy(): void {
+      // tslint:disable-next-line: deprecation
+      this.mobileQuery.removeListener(this._mobileQueryListener);
+     // this.autoLogoutSubscription.unsubscribe();
+  }
+
+
+  onChangeFilter(e:any){
+    console.log(e);
+  }
+
+  categoryFilterChange(e){
+     console.log(e.checked);
   }
 
 }

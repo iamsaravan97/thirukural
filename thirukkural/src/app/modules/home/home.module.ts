@@ -7,7 +7,6 @@ import { AngularMaterialModule } from 'src/app/angular-material/angular-material
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TreeModule } from '@circlon/angular-tree-component';
-import { CategoryTreeFilterComponent } from './category-tree-filter/category-tree-filter.component';
 
 
 
@@ -15,7 +14,6 @@ import { CategoryTreeFilterComponent } from './category-tree-filter/category-tre
 @NgModule({
   declarations: [
     HomeComponent,
-    CategoryTreeFilterComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +24,7 @@ import { CategoryTreeFilterComponent } from './category-tree-filter/category-tre
     TreeModule
   ],
   exports:[
-    HomeComponent
+    HomeComponent,
   ]
 })
 export class HomeModule { }

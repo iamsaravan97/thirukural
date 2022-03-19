@@ -11,6 +11,7 @@ import { Kural } from 'src/app/model/kural';
 import { PagedList } from 'src/app/model/pagedresults';
 import { PaginationMode } from 'src/app/model/type/type';
 import { KuralService } from 'src/app/service/kural.service';
+import { SharedService } from '../../shared/core/services/shared.service';
 
 @Component({
   selector: 'app-home',
@@ -83,7 +84,7 @@ export class HomeComponent implements OnInit {
   //#endregion
 
 
-  constructor(private _kuralservice: KuralService) { 
+  constructor(private _kuralservice: KuralService,private sharedService : SharedService) { 
     this.loadfilter();
    this.loadKurals(this.filterList);
    this.loadAllChapters();
@@ -92,6 +93,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.sharedService.onChangeFilterEmit.subscribe((result : FilterListDto)=>{
+      this.onChangeFilter(result);
+    })
   }
 
   ngOnDestroy(){

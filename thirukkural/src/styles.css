@@ -40,3 +40,11 @@ z-index: 999;
 .layout-height{
     height : calc(100vh - 180px);
 }
+
+.t_row{
+    display: flex;
+}
+
+.t_justifycontentSpaceBetween{
+    justify-content: space-between;
+}
