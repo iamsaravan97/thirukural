@@ -51,10 +51,10 @@
 
   </mat-toolbar>
 
-  <mat-sidenav-container class="navbar-sidenav-container">
+  <mat-sidenav-container class="navbar-sidenav-container" style="min-width: 300px;">
     <!-- Side nav -->
-    <mat-sidenav #snav [opened]="!mobileQuery.matches" [mode]="mobileQuery.matches ? 'over' : 'side'"
-      [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" class="sidenav scrollstyle t_overflow-y_auto">
+    <mat-sidenav #snav [disableClose]="true"  [mode]="mobileQuery.matches ? 'over' : 'side'" (openedChange)="toggleChange($event)"
+      [fixedInViewport]="mobileQuery.matches" class="sidenav scrollstyle t_overflow-y_auto">
 
       <mat-nav-list>
         <h3 mat-subheader>Home</h3>

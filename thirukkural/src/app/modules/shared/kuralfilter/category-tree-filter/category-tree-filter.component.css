@@ -15,3 +15,7 @@
   .submit-button {
     margin-top: 10px;
   }
+
+  .mat-tree-node {
+    min-height: 25px;
+}

@@ -73,6 +73,9 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
       this.filtertogglePosition = "before"
       this.filtertogglelabel = "Standard";
     }
+  }
+
+  toggleChange(e){
    
   }
 
