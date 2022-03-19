@@ -37,3 +37,7 @@ tr.kural-grid-row:not(.example-expanded-row):active {
 .kural-grid-detail {
   overflow: hidden;
 }
+
+tr.mat-row,tr.mat-footer-row {
+  height : 10px;
+}
