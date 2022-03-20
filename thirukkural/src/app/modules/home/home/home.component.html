@@ -9,12 +9,12 @@
 		aria-label="Select page of kural">
 	
 	</mat-paginator>
-	<table *ngIf="!mobileQuery.matches" mat-table [dataSource]="dataSource" multiTemplateDataRows
+	<table matSort (matSortChange)="sortData($event)" *ngIf="!mobileQuery.matches" mat-table [dataSource]="dataSource" multiTemplateDataRows
 		class="t_width_100 mat-elevation-z8">
 
 		<ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
-			<th style="text-align: center;"  mat-header-cell *matHeaderCellDef> {{column}} </th>
-			<td style="text-align: center;"  mat-cell *matCellDef="let element">
+			<th  mat-header-cell *matHeaderCellDef [mat-sort-header]="column"> {{column}} </th>
+			<td   mat-cell *matCellDef="let element">
 				<div *ngIf="column==trans_kuralno">{{element?.KuralId}}</div>
 				<div *ngIf="column==trans_colCategories">
 					<p>{{element?.Cg}}/{{element?.Section}}</p>
@@ -64,11 +64,11 @@
 
 	</table>
 
-	<table *ngIf="mobileQuery.matches" mat-table [dataSource]="dataSource" multiTemplateDataRows
+	<table matSort (matSortChange)="sortData($event)" *ngIf="mobileQuery.matches" mat-table [dataSource]="dataSource" multiTemplateDataRows
 		class="t_width_100 mat-elevation-z8">
 
 		<ng-container matColumnDef="{{column}}" *ngFor="let column of displayedMobColumns">
-			<th  mat-header-cell *matHeaderCellDef> {{column}} </th>
+			<th  mat-header-cell *matHeaderCellDef  [mat-sort-header]="column"> {{column}} </th>
 			<td  mat-cell *matCellDef="let element">
 				<div *ngIf="column==trans_kuralno">{{element?.KuralId}}</div>
 				<div *ngIf="column==trans_kural">

@@ -201,7 +201,17 @@ export class HomeComponent implements OnInit {
     this.loadKurals(filter);
   }
 
+  sortData(event :any){
+    this.kuralgrid = this.kuralgrid.sort((a,b)=>{
+      let isAsc = event.direction == 'asc';
+        return this.compare(a.Id,b.Id,isAsc)
+    });
+    this.dataSource = new MatTableDataSource<Kural>(this.kuralgrid);
+  }
 
 
+   compare(a, b, isAsc) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
 
 }
