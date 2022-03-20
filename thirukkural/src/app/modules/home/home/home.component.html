@@ -1,16 +1,22 @@
-<div class="layout-height ">
-	<mat-paginator class="t_height_10  mat-paginator-sticky" [length]="totalRows" [pageSize]="pagesize"
-		[pageSizeOptions]="pagesizeoptions" showFirstLastButtons (page)="pageChanged($event)"
+<div class="layout-height">
+
+	<h1 class="t_margin10">{{kuralgrid[0].ChapterId}}. {{kuralgrid[0].Chapter}}</h1>
+	<mat-divider></mat-divider>
+
+
+
+
+	<mat-paginator class="t_height_10  mat-paginator-sticky" [length]="totalRows" [pageSize]="pagesize" [hidePageSize]="mobileQuery.matches?true:false"
+		[pageSizeOptions]="pagesizeoptions" [showFirstLastButtons]="true" (page)="pageChanged($event)"
 		aria-label="Select page of kural">
+	
 	</mat-paginator>
-
-
 	<table *ngIf="!mobileQuery.matches" mat-table [dataSource]="dataSource" multiTemplateDataRows
 		class="t_width_100 mat-elevation-z8">
 
 		<ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
-			<th mat-header-cell *matHeaderCellDef> {{column}} </th>
-			<td mat-cell *matCellDef="let element">
+			<th style="text-align: center;"  mat-header-cell *matHeaderCellDef> {{column}} </th>
+			<td style="text-align: center;"  mat-cell *matCellDef="let element">
 				<div *ngIf="column==trans_kuralno">{{element?.KuralId}}</div>
 				<div *ngIf="column==trans_kural">
 					<p>{{element?.FirstLine}}</p>
@@ -61,8 +67,8 @@
 		class="t_width_100 mat-elevation-z8">
 
 		<ng-container matColumnDef="{{column}}" *ngFor="let column of displayedMobColumns">
-			<th style="text-align: center;" mat-header-cell *matHeaderCellDef> {{column}} </th>
-			<td mat-cell *matCellDef="let element">
+			<th  mat-header-cell *matHeaderCellDef> {{column}} </th>
+			<td  mat-cell *matCellDef="let element">
 				<div *ngIf="column==trans_kuralno">{{element?.KuralId}}</div>
 				<div *ngIf="column==trans_kural">
 					<p>{{element?.FirstLine}}</p>
@@ -108,8 +114,9 @@
 		<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="kural-grid-row"></tr>
 
 	</table>
-	<mat-paginator class="t_height_10  mat-paginator-sticky" [length]="totalRows" [pageSize]="pagesize"
-		[pageSizeOptions]="pagesizeoptions" showFirstLastButtons (page)="pageChanged($event)"
+
+	<mat-paginator class=" t_height_10  mat-paginator-sticky" [length]="totalRows" [pageSize]="pagesize" [hidePageSize]="mobileQuery.matches?true:false"
+		[pageSizeOptions]="pagesizeoptions" [hidePageSize]="true" (page)="pageChanged($event)" 
 		aria-label="Select page of kural">
 	</mat-paginator>
 </div>

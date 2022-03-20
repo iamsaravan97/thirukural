@@ -83,3 +83,15 @@ z-index: 999;
   ::-webkit-scrollbar {
     width: 10px;          
  }
+
+ th.mat-header-cell, td.mat-cell, td.mat-footer-cell{
+     padding : 5px !important;
+ }
+
+ .t_margin10{
+margin: 10px !important;
+ }
+
+ .mat-paginator {
+    background: transparent;
+}

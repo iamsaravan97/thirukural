@@ -79,8 +79,8 @@
 
         <mat-divider></mat-divider>
 
-        <div class="t_row t_justifycontentSpaceBetween">
-          <h3 mat-subheader>Category</h3>
+        <div class="t_row t_justifycontentSpaceBetween t_margin10">
+          <h3 class="t_margin10" mat-subheader>Category</h3>
           <mat-slide-toggle [labelPosition]="filtertogglePosition" (change)="categoryFilterChange($event)"
             [color]="color" [checked]="checked" [disabled]="disabled">
             {{filtertogglelabel}}
@@ -97,7 +97,7 @@
     <!-- Main content -->
     <mat-sidenav-content>
 
-      <div class="t_margin10">
+      <div>
         <router-outlet></router-outlet>
       </div>
 
