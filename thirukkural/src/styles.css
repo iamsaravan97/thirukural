@@ -50,7 +50,7 @@ z-index: 999;
 }
 
 .layout-height{
-    height : calc(100vh - 180px);
+    height : 100%
 }
 
 .t_row{
