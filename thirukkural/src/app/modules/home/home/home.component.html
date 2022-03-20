@@ -16,6 +16,9 @@
 			<th style="text-align: center;"  mat-header-cell *matHeaderCellDef> {{column}} </th>
 			<td style="text-align: center;"  mat-cell *matCellDef="let element">
 				<div *ngIf="column==trans_kuralno">{{element?.KuralId}}</div>
+				<div *ngIf="column==trans_colCategories">
+					<p>{{element?.Cg}}/{{element?.Section}}</p>
+				</div>
 				<div *ngIf="column==trans_kural">
 					<p>{{element?.FirstLine}}</p>
 					<p>{{element?.SecondLine}}</p>

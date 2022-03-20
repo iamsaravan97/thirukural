@@ -53,10 +53,13 @@ export class HomeComponent implements OnInit {
   trans_engexp : string = "ஆங்கில உரை";
   trans_transliteration : string = "ஆங்கில உச்சரிப்பு";
 
+  trans_colCategories :string  = "அதிகாரம்/இயல்/பால்";
+
+
   //#endregion
 
   //#region grid setup
-  displayedColumns : string[] = [this.trans_kuralno,this.trans_kural,this.trans_transliteration];
+  displayedColumns : string[] = [this.trans_kuralno,this.trans_colCategories,this.trans_kural,this.trans_transliteration];
   displayedMobColumns : string[] = [this.trans_kuralno,this.trans_kural];
   private _mobileQueryListener: () => void;
   mobileQuery: MediaQueryList;
