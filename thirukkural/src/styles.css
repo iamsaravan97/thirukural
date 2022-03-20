@@ -92,6 +92,10 @@ z-index: 999;
 margin: 10px !important;
  }
 
+ .t_marginLeft10{
+    margin-left: 10px !important;
+     }
+
  .mat-paginator {
     background: transparent;
 }
