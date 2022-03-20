@@ -53,7 +53,7 @@
 
   <mat-sidenav-container class="navbar-sidenav-container">
     <!-- Side nav -->
-    <mat-sidenav #snav [disableClose]="false" [mode]="'push'"
+    <mat-sidenav #snav [disableClose]="false" [mode]="mobileQuery.matches?'push':'side'"
       (openedChange)="toggleChange($event)" [fixedInViewport]="mobileQuery.matches" class="sidenav"
       [style]="mobileQuery.matches?'min-width: 350px !important;max-width: 350px !important;':'min-width: 400px !important;max-width: 400px !important;'">
 

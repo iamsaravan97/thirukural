@@ -117,7 +117,7 @@
 	</table>
 
 	<mat-paginator class=" t_height_10  mat-paginator-sticky" [length]="totalRows" [pageSize]="pagesize" [hidePageSize]="mobileQuery.matches?true:false"
-		[pageSizeOptions]="pagesizeoptions" [hidePageSize]="true" (page)="pageChanged($event)" 
+		[pageSizeOptions]="pagesizeoptions"  [showFirstLastButtons]="true" (page)="pageChanged($event)" 
 		aria-label="Select page of kural">
 	</mat-paginator>
 </div>

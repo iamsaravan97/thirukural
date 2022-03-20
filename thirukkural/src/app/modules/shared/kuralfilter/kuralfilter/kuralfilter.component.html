@@ -7,7 +7,7 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
 
-            <mat-selection-list  class="t_height_100 scrollstyle t_overflow-y_auto" #selectsections>
+            <mat-selection-list  class="t_height_100 " #selectsections>
                 <mat-list-option (click)="filterbySectionId($event, selectsections?.selectedOptions.selected)"
                     [value]="section" *ngFor="let section of sections">
                     {{section.Name}} ({{section.Count}})
@@ -23,7 +23,7 @@
             </mat-expansion-panel-header>
             <div class="t_overflow-y_auto">
 
-                <mat-selection-list  class="t_height_100 scrollstyle t_overflow-y_auto" #selectsubsections>
+                <mat-selection-list  class="t_height_100 " #selectsubsections>
                     <mat-list-option
                         (click)="filterbySubsectionId($event, selectsubsections?.selectedOptions.selected)"
                         [value]="subsection" *ngFor="let subsection of subsections">
@@ -39,8 +39,8 @@
                     {{trans_categories}} ({{categories.length}}) 
                 </mat-panel-title>
             </mat-expansion-panel-header>
-            <div class="t_height_90 scrollstyle t_overflow-y_auto">
-                <mat-selection-list  class="t_height_100 scrollstyle t_overflow-y_auto" #selectcategories >
+            <div class="t_height_90 ">
+                <mat-selection-list  class="t_height_100 " #selectcategories >
                     <mat-list-option (click)="filterbyChapterId($event, selectcategories?.selectedOptions.selected)" [value]="category" *ngFor="let category of categories" >
                     {{category.Name}} ({{category.Count}})
                     </mat-list-option>
