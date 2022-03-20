@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 
 import { MatTableDataSource } from '@angular/material/table';
@@ -43,7 +44,7 @@ export class HomeComponent implements OnInit {
   trans_categories : string = "அதிகாரங்கள்"
   trans_sections : string = "பால்கள்"
   trans_subsections : string = "இயல்கள்"
-  trans_kuralno : string = "குறள் எண்"
+  trans_kuralno : string = "எண்"
   trans_kural : string = "குறள்கள்";
   trans_muva : string = "மு.வ உரை";
   trans_kalaignar : string = "கலைஞர் உரை";
@@ -55,7 +56,11 @@ export class HomeComponent implements OnInit {
   //#endregion
 
   //#region grid setup
-  displayedColumns : string[] = [this.trans_kuralno,this.trans_kural,this.trans_transliteration]
+  displayedColumns : string[] = [this.trans_kuralno,this.trans_kural,this.trans_transliteration];
+  displayedMobColumns : string[] = [this.trans_kuralno,this.trans_kural];
+  private _mobileQueryListener: () => void;
+  mobileQuery: MediaQueryList;
+
 
   dataSource : MatTableDataSource<Kural>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -84,9 +89,13 @@ export class HomeComponent implements OnInit {
   //#endregion
 
 
-  constructor(private _kuralservice: KuralService,private sharedService : SharedService) { 
+  constructor(private _kuralservice: KuralService,private sharedService : SharedService, private changeDetectorRef: ChangeDetectorRef, private media: MediaMatcher) { 
     this.loadfilter();
    this.loadKurals(this.filterList);
+   this.mobileQuery = this.media.matchMedia('(max-width: 1000px)');
+   this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+   // tslint:disable-next-line: deprecation
+   this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
   ngOnInit(): void {

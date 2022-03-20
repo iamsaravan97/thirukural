@@ -9,7 +9,7 @@
 
     <a class="navbar-brand" [routerLink]="['/']" matTooltip="Home">
       <h1>
-        Agara Mudhala
+        {{sitename}}
       </h1>
     </a>
 
@@ -51,10 +51,11 @@
 
   </mat-toolbar>
 
-  <mat-sidenav-container class="navbar-sidenav-container" style="min-width: 300px;">
+  <mat-sidenav-container class="navbar-sidenav-container">
     <!-- Side nav -->
-    <mat-sidenav #snav [disableClose]="true"  [mode]="mobileQuery.matches ? 'over' : 'side'" (openedChange)="toggleChange($event)"
-      [fixedInViewport]="mobileQuery.matches" class="sidenav scrollstyle t_overflow-y_auto">
+    <mat-sidenav #snav [disableClose]="true" [mode]="mobileQuery.matches ? 'over' : 'side'"
+      (openedChange)="toggleChange($event)" [fixedInViewport]="mobileQuery.matches" class="sidenav"
+      style="min-width: 400px !important;max-width: 400px !important;">
 
       <mat-nav-list>
         <h3 mat-subheader>Home</h3>
@@ -80,35 +81,33 @@
 
         <div class="t_row t_justifycontentSpaceBetween">
           <h3 mat-subheader>Category</h3>
-          <mat-slide-toggle
-          [labelPosition]="filtertogglePosition"
-          (change)="categoryFilterChange($event)"
-          [color]="color"
-          [checked]="checked"
-          [disabled]="disabled">
-          {{filtertogglelabel}}
-        </mat-slide-toggle>
+          <mat-slide-toggle [labelPosition]="filtertogglePosition" (change)="categoryFilterChange($event)"
+            [color]="color" [checked]="checked" [disabled]="disabled">
+            {{filtertogglelabel}}
+          </mat-slide-toggle>
         </div>
-    
-        <app-category-tree-filter class="scrollstyle t_overflow-y_auto" *ngIf="checked" (onChangeFilter)="onChangeFilter($event)"></app-category-tree-filter>
+
+        <app-category-tree-filter class="scrollstyle t_overflow-y_auto" *ngIf="checked"
+          (onChangeFilter)="onChangeFilter($event)"></app-category-tree-filter>
         <app-kuralfilter class="scrollstyle t_overflow-y_auto" *ngIf="!checked"></app-kuralfilter>
       </mat-nav-list>
 
     </mat-sidenav>
 
     <!-- Main content -->
-    <mat-sidenav-content class="sidenav-content">
+    <mat-sidenav-content>
 
-      <div class="progress-bar-container">
-        <!-- <mat-progress-bar color="accent" mode="indeterminate" *ngIf="spinnerService.visibility | async">
-        </mat-progress-bar> -->
-        <!-- <mat-spinner class="spinner" [diameter]="50" *ngIf="showSpinner"></mat-spinner> -->
+      <div class="t_margin10">
+        <router-outlet></router-outlet>
       </div>
 
-
-      <router-outlet></router-outlet>
-
+     <!-- // <app-footer></app-footer> -->
     </mat-sidenav-content>
+
   </mat-sidenav-container>
+
+  <footer>
+    <h1>Hello</h1>
+  </footer>
 
 </div>

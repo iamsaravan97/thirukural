@@ -1,5 +1,6 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { LoadingserviceService } from '../../core/services/loadingservice.service';
 import { SharedService } from '../../core/services/shared.service';
 
@@ -18,7 +19,8 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
   checked = false;
   disabled = false;
   filtertogglelabel : string = "Standard";
-  filtertogglePosition : string = "before"
+  filtertogglePosition : string = "before";
+  sitename : string = environment.sitename;
 
   constructor(private loadingservice : LoadingserviceService, private sharedService : SharedService,
     private changeDetectorRef: ChangeDetectorRef, private media: MediaMatcher) {

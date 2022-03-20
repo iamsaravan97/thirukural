@@ -4,6 +4,8 @@ C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thi
 C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thirukkural\obj\Release\net5.0\PubTmp\Out\Tamil.Thirukkural.dll
 C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thirukkural\obj\Release\net5.0\PubTmp\Out\Tamil.Thirukkural.runtimeconfig.json
 C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thirukkural\obj\Release\net5.0\PubTmp\Out\Tamil.Thirukkural.pdb
+C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thirukkural\obj\Release\net5.0\PubTmp\Out\AutoMapper.dll
+C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thirukkural\obj\Release\net5.0\PubTmp\Out\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thirukkural\obj\Release\net5.0\PubTmp\Out\Microsoft.Data.SqlClient.dll
 C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thirukkural\obj\Release\net5.0\PubTmp\Out\Microsoft.EntityFrameworkCore.dll
 C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thirukkural\obj\Release\net5.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Abstractions.dll

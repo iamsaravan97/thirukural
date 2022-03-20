@@ -4,9 +4,10 @@
 
 export const environment = {
   production: false,
-  url : "https://localhost:44339/kural/",
+  sitename : "அகர முதல",
+  url : "http://192.168.29.212:90/kural/"
+  // url : "https://localhost:44339/kural/",
   // url : "http://thirukkuralapi.somee.com/kural"
-
 };
 
 /*

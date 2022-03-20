@@ -1,134 +1,124 @@
-
 <div class="main">
 
-	<div class="content" fxLayoutGap="10px" fxLayout="row" fxLayout.xs="column" fxFlexFill>
+	<div fxLayout="row" fxLayout.xs="column" fxFlexFill>
 
-		<!-- <div class="layout-height" fxFlex="20" fxFlex.xs="55">
-			<mat-card class="t_height_100">
-				<app-category-tree-filter (onChangeFilter)="onChangeFilter($event)"></app-category-tree-filter>
-			</mat-card>
-		</div> -->
 
 		<div fxFlex="100" class="layout-height ">
-			<mat-card class="t_height_100">
-				<div class="t_height_90 scrollstyle t_overflow-y_auto">
-					<table mat-table [dataSource]="dataSource" multiTemplateDataRows
-						class="t_width_100 mat-elevation-z8">
+			<mat-paginator class="t_height_10  mat-paginator-sticky" [length]="totalRows" [pageSize]="pagesize"
+				[pageSizeOptions]="pagesizeoptions" showFirstLastButtons (page)="pageChanged($event)"
+				aria-label="Select page of kural">
+			</mat-paginator>
 
-						<ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
-							<th mat-header-cell *matHeaderCellDef> {{column}} </th>
-							<td mat-cell *matCellDef="let element">
-								<div *ngIf="column==trans_kuralno">{{element?.KuralId}}</div>
-								<div *ngIf="column==trans_kural">
-									<p>{{element?.FirstLine}}</p>
-									<p>{{element?.SecondLine}}</p>
-								</div>
-								<div *ngIf="column==trans_transliteration">
-									<p>{{element?.TransFirstLine}}</p>
-									<p>{{element?.TransSecondLine}}</p>
-								</div>
-							</td>
-						</ng-container>
 
-						<!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-						<ng-container matColumnDef="expandedDetail">
-							<td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-								<div class="kural-grid-detail"
-									[@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+			<table *ngIf="!mobileQuery.matches"  mat-table [dataSource]="dataSource" multiTemplateDataRows class="t_width_100 mat-elevation-z8">
 
-									<mat-card>
-										<b>{{trans_kalaignar}}:</b>
-										<p>{{element?.DefinitionKalaignar}}</p>
+				<ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
+					<th mat-header-cell *matHeaderCellDef> {{column}} </th>
+					<td mat-cell *matCellDef="let element">
+						<div *ngIf="column==trans_kuralno">{{element?.KuralId}}</div>
+						<div *ngIf="column==trans_kural">
+							<p>{{element?.FirstLine}}</p>
+							<p>{{element?.SecondLine}}</p>
+						</div>
+						<div *ngIf="column==trans_transliteration">
+							<p>{{element?.TransFirstLine}}</p>
+							<p>{{element?.TransSecondLine}}</p>
+						</div>
+					</td>
+				</ng-container>
 
-										<b>{{trans_pappaiyaa}}:</b>
-										<p>{{element?.DefinitionPapaiya}}</p>
+				<!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+				<ng-container matColumnDef="expandedDetail">
+					<td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+						<div class="kural-grid-detail"
+							[@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
 
-										<b>{{trans_muva}}:</b>
-										<p>{{element?.DefinitionMuVa}}</p>
+							<mat-card>
+								<b>{{trans_kalaignar}}:</b>
+								<p>{{element?.DefinitionKalaignar}}</p>
 
-										<b>{{trans_engcouplet}}:</b>
-										<p>{{element?.English}}</p>
+								<b>{{trans_pappaiyaa}}:</b>
+								<p>{{element?.DefinitionPapaiya}}</p>
 
-										<b>{{trans_engexp}}:</b>
-										<p>{{element?.Explanation}}</p>
-									</mat-card>
-								</div>
-							</td>
-						</ng-container>
+								<b>{{trans_muva}}:</b>
+								<p>{{element?.DefinitionMuVa}}</p>
 
-						<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-						<tr mat-row *matRowDef="let element; columns: displayedColumns;" class="kural-grid-row"
-							[class.example-expanded-row]="expandedElement === element"
-							(click)="expandedElement = expandedElement === element ? null : element">
-						</tr>
-						<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="kural-grid-row"></tr>
-					</table>
-				</div>
+								<b>{{trans_engcouplet}}:</b>
+								<p>{{element?.English}}</p>
 
-				<mat-paginator class="t_height_10  mat-paginator-sticky" [length]="totalRows" [pageSize]="pagesize"
-					[pageSizeOptions]="pagesizeoptions" showFirstLastButtons (page)="pageChanged($event)"
-					aria-label="Select page of kural">
-				</mat-paginator>
-			</mat-card>
+								<b>{{trans_engexp}}:</b>
+								<p>{{element?.Explanation}}</p>
+							</mat-card>
+						</div>
+					</td>
+				</ng-container>
+
+				<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+				<tr mat-row *matRowDef="let element; columns: displayedColumns;" class="kural-grid-row"
+					[class.example-expanded-row]="expandedElement === element"
+					(click)="expandedElement = expandedElement === element ? null : element">
+				</tr>
+				<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="kural-grid-row"></tr>
+
+			</table>
+
+			<table  *ngIf="mobileQuery.matches"  mat-table [dataSource]="dataSource" multiTemplateDataRows class="t_width_100 mat-elevation-z8">
+
+				<ng-container matColumnDef="{{column}}" *ngFor="let column of displayedMobColumns">
+					<th style="text-align: center;" mat-header-cell *matHeaderCellDef> {{column}} </th>
+					<td mat-cell *matCellDef="let element">
+						<div *ngIf="column==trans_kuralno">{{element?.KuralId}}</div>
+						<div *ngIf="column==trans_kural">
+							<p>{{element?.FirstLine}}</p>
+							<p>{{element?.SecondLine}}</p>
+						</div>
+						<div *ngIf="column==trans_transliteration">
+							<p>{{element?.TransFirstLine}}</p>
+							<p>{{element?.TransSecondLine}}</p>
+						</div>
+					</td>
+				</ng-container>
+
+				<!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+				<ng-container matColumnDef="expandedDetail">
+					<td mat-cell *matCellDef="let element" [attr.colspan]="displayedMobColumns.length">
+						<div class="kural-grid-detail"
+							[@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+
+							<mat-card>
+								<b>{{trans_kalaignar}}:</b>
+								<p>{{element?.DefinitionKalaignar}}</p>
+
+								<b>{{trans_pappaiyaa}}:</b>
+								<p>{{element?.DefinitionPapaiya}}</p>
+
+								<b>{{trans_muva}}:</b>
+								<p>{{element?.DefinitionMuVa}}</p>
+
+								<b>{{trans_engcouplet}}:</b>
+								<p>{{element?.English}}</p>
+
+								<b>{{trans_engexp}}:</b>
+								<p>{{element?.Explanation}}</p>
+							</mat-card>
+						</div>
+					</td>
+				</ng-container>
+
+				<tr mat-header-row *matHeaderRowDef="displayedMobColumns"></tr>
+				<tr mat-row *matRowDef="let element; columns: displayedMobColumns;" class="kural-grid-row"
+					[class.example-expanded-row]="expandedElement === element"
+					(click)="expandedElement = expandedElement === element ? null : element">
+				</tr>
+				<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="kural-grid-row"></tr>
+
+			</table>
+
+
+
+
 		</div>
 
-		<!-- <div class="layout-height" fxFlex="20" fxFlex.xs="15">
-			<mat-card  class="t_height_100 scrollstyle t_overflow-y_auto">
-			<mat-accordion >
-				<mat-expansion-panel >
-					<mat-expansion-panel-header>
-						<mat-panel-title>
-							{{trans_sections}} ({{sections.length}}) 
-						</mat-panel-title>
-					</mat-expansion-panel-header>
-
-					<mat-selection-list  class="t_height_100 scrollstyle t_overflow-y_auto" #selectsections>
-						<mat-list-option (click)="filterbySectionId($event, selectsections?.selectedOptions.selected)"
-							[value]="section" *ngFor="let section of sections">
-							{{section.Name}} ({{section.Count}})
-						</mat-list-option>
-					</mat-selection-list>
-
-				</mat-expansion-panel>
-				<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-					<mat-expansion-panel-header>
-						<mat-panel-title>
-							{{trans_subsections}} ({{subsections.length}})
-						</mat-panel-title>
-					</mat-expansion-panel-header>
-					<div class="t_overflow-y_auto">
-
-						<mat-selection-list  class="t_height_100 scrollstyle t_overflow-y_auto" #selectsubsections>
-							<mat-list-option
-								(click)="filterbySubsectionId($event, selectsubsections?.selectedOptions.selected)"
-								[value]="subsection" *ngFor="let subsection of subsections">
-								{{subsection.Name}} ({{subsection.Count}})
-							</mat-list-option>
-						</mat-selection-list>
-					</div>
-				</mat-expansion-panel>
-
-				<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-					<mat-expansion-panel-header>
-						<mat-panel-title>
-							{{trans_categories}} ({{categories.length}}) 
-						</mat-panel-title>
-					</mat-expansion-panel-header>
-					<div class="t_height_90 scrollstyle t_overflow-y_auto">
-						<mat-selection-list  class="t_height_100 scrollstyle t_overflow-y_auto" #selectcategories >
-							<mat-list-option (click)="filterbyChapterId($event, selectcategories?.selectedOptions.selected)" [value]="category" *ngFor="let category of categories" >
-							{{category.Name}} ({{category.Count}})
-							</mat-list-option>
-						  </mat-selection-list>
-						
-					</div>
-				</mat-expansion-panel>
-
-			</mat-accordion>
-		</mat-card >
-
-
-		</div> -->
 
 	</div>
 </div>

@@ -50,7 +50,6 @@ C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thi
 C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thirukkural\obj\Release\net5.0\Tamil.Thirukkural.MvcApplicationPartsAssemblyInfo.cs
 C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thirukkural\obj\Release\net5.0\Tamil.Thirukkural.MvcApplicationPartsAssemblyInfo.cache
 C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thirukkural\obj\Release\net5.0\staticwebassets\Tamil.Thirukkural.StaticWebAssets.Manifest.cache
-C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thirukkural\obj\Release\net5.0\staticwebassets\Tamil.Thirukkural.StaticWebAssets.xml
 C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thirukkural\obj\Release\net5.0\scopedcss\bundle\Tamil.Thirukkural.styles.css
 C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thirukkural\obj\Release\net5.0\Tamil.Thirukkural.RazorTargetAssemblyInfo.cache
 C:\Project\Personal\POC\MyProject\angular\thirukural\tamil.thirukkural\tamil.thirukkural\obj\Release\net5.0\Tamil.Thirukkural.csproj.CopyComplete
