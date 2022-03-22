@@ -52,8 +52,7 @@ export class HomeComponent implements OnInit {
   trans_engcouplet : string = "ஆங்கில வழியில்";
   trans_engexp : string = "ஆங்கில உரை";
   trans_transliteration : string = "ஆங்கில உச்சரிப்பு";
-
-  trans_colCategories :string  = "அதிகாரம்/இயல்/பால்";
+  trans_colCategories :string  = "இயல்/பால்";
 
 
   //#endregion
